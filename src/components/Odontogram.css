@@ -1,0 +1,12 @@
+.Odontogram {
+	text-align: center;
+	padding: 5px;
+	height: 220px;
+}
+.contenedor {
+	margin: 20px auto;
+	width: 67%;
+	background-color: #eaeaef;
+	border-radius: 20px;
+	padding: 40px;
+}
