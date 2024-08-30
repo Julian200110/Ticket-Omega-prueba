@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {
   CButton,
@@ -45,6 +46,37 @@ import {
 } from '@coreui/icons'
 import imagen from './firma.png'
 const Collapses = () => {
+  const [appointments, setAppointments] = useState([])
+  function getAppointments() {
+    const params = {
+      patient_id: 1,
+    }
+    const options = {
+      method: 'GET',
+      url: 'https://demo.habidd.com/api/ehr/authorization/informedconsent/list.php',
+      params,
+    }
+    axios
+      .request(options)
+      .then((response) => {
+        console.log(response.data.data)
+        console.log('golaa')
+        return response
+      })
+      .then((responseData) => {
+        if (responseData && responseData.data) {
+          setAppointments(responseData.data.data)
+        } else {
+          setAppointments([])
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+  useEffect(() => {
+    getAppointments()
+  }, [])
   return (
     <CContainer>
       <CRow>
@@ -81,6 +113,12 @@ const Collapses = () => {
             <CButton color="primary" variant="ghost" href="/#/base/list-groups">
               Ordenes medicas
             </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
+              Plan de tratamiento
+            </CButton>
           </CButtonGroup>
         </CCol>
         <CCol md={9}>
@@ -105,17 +143,20 @@ const Collapses = () => {
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  <CTableRow>
-                    <CTableHeaderCell scope="row">17/07/2024</CTableHeaderCell>
-                    <CTableDataCell>Paciente</CTableDataCell>
-                    <CTableDataCell>Alexander Gonzalez</CTableDataCell>
-                    <CTableDataCell>123456789</CTableDataCell>
-                    <CTableDataCell>104</CTableDataCell>
-                    <CTableDataCell>02</CTableDataCell>
-                    <CTableDataCell>
-                      <img src={imagen} alt="Signature" width="100" height="50" />
-                    </CTableDataCell>
-                  </CTableRow>
+                  {appointments.map((item, index) => (
+                    <CTableRow key={index}>
+                      <CTableHeaderCell>{item.date}</CTableHeaderCell>
+                      <CTableHeaderCell>{item.name}</CTableHeaderCell>
+                      <CTableDataCell>{item.requesterRelationShip}</CTableDataCell>
+                      <CTableDataCell>{item.idNumber}</CTableDataCell>
+                      <CTableDataCell>{item.procedure_name}</CTableDataCell>
+                      <CTableDataCell>{item.professional_id}</CTableDataCell>
+                      <CTableDataCell>
+                        {' '}
+                        {<img src={item.signature} alt="Signature" width="100" height="50" />}
+                      </CTableDataCell>
+                    </CTableRow>
+                  ))}
                 </CTableBody>
               </CTable>
               <CRow className="p-2">

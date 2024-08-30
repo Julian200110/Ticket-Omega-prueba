@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import {
   CButton,
   CDropdown,
@@ -45,6 +46,37 @@ import {
 } from '@coreui/icons'
 
 const ChecksRadios = () => {
+  const [appointments, setAppointments] = useState([])
+  function getAppointments() {
+    const params = {
+      patient_id: 1,
+    }
+    const options = {
+      method: 'GET',
+      url: 'https://demo.habidd.com/api/ehr/evolution/list.php',
+      params,
+    }
+    axios
+      .request(options)
+      .then((response) => {
+        console.log(response.data.data)
+        console.log('golaa')
+        return response
+      })
+      .then((responseData) => {
+        if (responseData && responseData.data) {
+          setAppointments(responseData.data.data)
+        } else {
+          setAppointments([])
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+  useEffect(() => {
+    getAppointments()
+  }, [])
   return (
     <CContainer>
       <CRow>
@@ -81,6 +113,12 @@ const ChecksRadios = () => {
             <CButton color="primary" variant="ghost" href="/#/base/list-groups">
               Ordenes medicas
             </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
+              Plan de tratamiento
+            </CButton>
           </CButtonGroup>
         </CCol>
         <CCol md={9} style={{ maxHeight: '400px', overflowY: 'auto' }}>
@@ -97,28 +135,28 @@ const ChecksRadios = () => {
                   <CTableRow>
                     <CTableHeaderCell scope="col">Fecha</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Hora</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Tipo</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Acciones</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Razon principal</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
+
                 <CTableBody>
-                  <CTableRow>
-                    <CTableHeaderCell scope="row">02/11/2020</CTableHeaderCell>
-                    <CTableDataCell> 07:20</CTableDataCell>
-                    <CTableDataCell>
-                      890203 CONSULTA DE PRIMERA VEZ POR ODONTOLOGÍA GENERAL
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <CButtonGroup role="group" aria-label="Basic mixed styles example">
-                        <CButton color="success">Mostrar</CButton>
-                        <CButton color="warning">Editar</CButton>
-                        <CButton color="danger">Eliminar</CButton>
-                      </CButtonGroup>
-                    </CTableDataCell>
-                  </CTableRow>
+                  {appointments.map((item, index) => (
+                    <CTableRow key={index}>
+                      <CTableHeaderCell>{item.date}</CTableHeaderCell>
+                      <CTableDataCell>{item.time}</CTableDataCell>
+
+                      <CTableDataCell>{item.reason}</CTableDataCell>
+                    </CTableRow>
+                  ))}
                 </CTableBody>
               </CTable>
-              <CButton color="primary">Añadir nueva consulta</CButton>
+              <CRow className="p-2">
+                <CCol>
+                  <CButton color="primary" href="#/base/tables">
+                    Agregar consulta
+                  </CButton>
+                </CCol>
+              </CRow>
             </CCardBody>
           </CCard>
         </CCol>

@@ -1,146 +1,158 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 import {
-  CAlert,
-  CAlertHeading,
-  CAlertLink,
+  CButton,
+  CDropdown,
+  CDropdownDivider,
+  CDropdownItem,
+  CDropdownMenu,
+  CDropdownToggle,
+  CButtonGroup,
+  CButtonToolbar,
   CCard,
   CCardBody,
   CCardHeader,
   CCol,
+  CFormCheck,
+  CFormInput,
+  CInputGroup,
+  CTable,
+  CTableBody,
+  CTableDataCell,
+  CTableHead,
+  CTableHeaderCell,
+  CTableRow,
+  CInputGroupText,
   CRow,
+  CContainer,
 } from '@coreui/react'
 import { DocsExample } from 'src/components'
+import CIcon from '@coreui/icons-react'
+import {
+  cilBell,
+  cilCalculator,
+  cilChartPie,
+  cilCursor,
+  cilDescription,
+  cilDrop,
+  cilNotes,
+  cilPencil,
+  cilPuzzle,
+  cilSpeedometer,
+  cilStar,
+  cilUser,
+  cilCalendar,
+} from '@coreui/icons'
 
 const Alerts = () => {
+  const [appointments, setAppointments] = useState([])
+  function getAppointments() {
+    const options = {
+      method: 'GET',
+      url: 'https://demo.habidd.com/api/ehr/orders/drug/list.php?patient_id=1',
+    }
+    axios
+      .request(options)
+      .then((response) => {
+        console.log(response.data.data)
+        console.log('golaa')
+        return response
+      })
+      .then((responseData) => {
+        if (responseData && responseData.data) {
+          setAppointments(responseData.data.data)
+        } else {
+          setAppointments([])
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+  useEffect(() => {
+    getAppointments()
+  }, [])
   return (
-    <CRow>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Alert</strong>
-          </CCardHeader>
-          <CCardBody>
-            <p className="text-medium-emphasis small">
-              React Alert is prepared for any length of text, as well as an optional close button.
-              For a styling, use one of the <strong>required</strong> contextual <code>color</code>{' '}
-              props (e.g., <code>primary</code>). For inline dismissal, use the{' '}
-              <a href="https://coreui.io/react/docs/4.0/components/alert#dismissing">
-                dismissing prop
-              </a>
-              .
-            </p>
-            <DocsExample href="components/alert">
-              <CAlert color="primary">A simple primary alert—check it out!</CAlert>
-              <CAlert color="secondary">A simple secondary alert—check it out!</CAlert>
-              <CAlert color="success">A simple success alert—check it out!</CAlert>
-              <CAlert color="danger">A simple danger alert—check it out!</CAlert>
-              <CAlert color="warning">A simple warning alert—check it out!</CAlert>
-              <CAlert color="info">A simple info alert—check it out!</CAlert>
-              <CAlert color="light">A simple light alert—check it out!</CAlert>
-              <CAlert color="dark">A simple dark alert—check it out!</CAlert>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Alert</strong> <small>Link color</small>
-          </CCardHeader>
-          <CCardBody>
-            <p className="text-medium-emphasis small">
-              Use the <code>&lt;CAlertLink&gt;</code> component to immediately give matching colored
-              links inside any alert.
-            </p>
-            <DocsExample href="components/alert#link-color">
-              <CAlert color="primary">
-                A simple primary alert with <CAlertLink href="#">an example link</CAlertLink>. Give
-                it a click if you like.
-              </CAlert>
-              <CAlert color="secondary">
-                A simple secondary alert with <CAlertLink href="#">an example link</CAlertLink>.
-                Give it a click if you like.
-              </CAlert>
-              <CAlert color="success">
-                A simple success alert with <CAlertLink href="#">an example link</CAlertLink>. Give
-                it a click if you like.
-              </CAlert>
-              <CAlert color="danger">
-                A simple danger alert with <CAlertLink href="#">an example link</CAlertLink>. Give
-                it a click if you like.
-              </CAlert>
-              <CAlert color="warning">
-                A simple warning alert with <CAlertLink href="#">an example link</CAlertLink>. Give
-                it a click if you like.
-              </CAlert>
-              <CAlert color="info">
-                A simple info alert with <CAlertLink href="#">an example link</CAlertLink>. Give it
-                a click if you like.
-              </CAlert>
-              <CAlert color="light">
-                A simple light alert with <CAlertLink href="#">an example link</CAlertLink>. Give it
-                a click if you like.
-              </CAlert>
-              <CAlert color="dark">
-                A simple dark alert with <CAlertLink href="#">an example link</CAlertLink>. Give it
-                a click if you like.
-              </CAlert>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Alert</strong> <small>Additional content</small>
-          </CCardHeader>
-          <CCardBody>
-            <p className="text-medium-emphasis small">
-              Alert can also incorporate supplementary components &amp; elements like heading,
-              paragraph, and divider.
-            </p>
-            <DocsExample href="components/alert#additional-content">
-              <CAlert color="success">
-                <CAlertHeading tag="h4">Well done!</CAlertHeading>
-                <p>
-                  Aww yeah, you successfully read this important alert message. This example text is
-                  going to run a bit longer so that you can see how spacing within an alert works
-                  with this kind of content.
-                </p>
-                <hr />
-                <p className="mb-0">
-                  Whenever you need to, be sure to use margin utilities to keep things nice and
-                  tidy.
-                </p>
-              </CAlert>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Alert</strong> <small>Dismissing</small>
-          </CCardHeader>
-          <CCardBody>
-            <p className="text-medium-emphasis small">
-              Alerts can also be easily dismissed. Just add the <code>dismissible</code> prop.
-            </p>
-            <DocsExample href="components/alert#dismissing">
-              <CAlert
-                color="warning"
-                dismissible
-                onClose={() => {
-                  alert('👋 Well, hi there! Thanks for dismissing me.')
-                }}
-              >
-                <strong>Go right ahead</strong> and click that dimiss over there on the right.
-              </CAlert>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
+    <CContainer>
+      <CRow>
+        <CCol md={3}>
+          {' '}
+          <CButtonGroup vertical role="group" aria-label="Vertical button group">
+            <CButton color="primary" variant="ghost" href="#/buttons/button-groups">
+              Datos Personales
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/forms/checks-radios">
+              Consultas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/Forms/Floating-labels">
+              Anamnesis
+            </CButton>
+            <CButton color="primary" variant="ghost" text-align="end" href="#/base/breadcrumbs">
+              Examen Fisico
+            </CButton>
+            <CButton color="primary" variant="ghost" href="#/forms/Range">
+              Odontograma
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/navs">
+              Diagnosticos
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/forms/Select">
+              Evolucion
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/carousels">
+              Soportes
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/collapses">
+              Consentimiento informado
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/list-groups">
+              Ordenes medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts" active>
+              Plan de tratamiento
+            </CButton>
+          </CButtonGroup>
+        </CCol>
+        <CCol md={9}>
+          {' '}
+          <CCard className="mb-4">
+            <CCardHeader>
+              <strong>
+                <CIcon icon={cilUser} />
+                Preescripciones medicas
+              </strong>
+            </CCardHeader>
+            <CCardBody style={{ maxHeight: '400px', overflowY: 'auto' }}>
+              <CTable striped hover bordered>
+                <CTableHead color="primary">
+                  <CTableRow>
+                    <CTableHeaderCell scope="col">Fecha</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Tratamiento</CTableHeaderCell>
+                  </CTableRow>
+                </CTableHead>
+                <CTableBody>
+                  <CTableRow>
+                    <CTableHeaderCell>2024-08-08</CTableHeaderCell>
+                    <CTableDataCell>Se debe seguir indicaciones</CTableDataCell>
+                  </CTableRow>
+                </CTableBody>
+              </CTable>
+              <CRow className="p-2">
+                <CCol>
+                  <CButton color="primary" href="#/notifications/badges">
+                    Agregar Preescripcion
+                  </CButton>
+                </CCol>
+              </CRow>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+    </CContainer>
   )
 }
 

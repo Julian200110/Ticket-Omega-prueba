@@ -1,121 +1,183 @@
-import React from 'react'
-import { CButton, CCard, CCardBody, CCardHeader, CCol, CBadge, CRow } from '@coreui/react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+import {
+  CButton,
+  CDropdown,
+  CDropdownDivider,
+  CDropdownItem,
+  CDropdownMenu,
+  CDropdownToggle,
+  CButtonGroup,
+  CButtonToolbar,
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCol,
+  CFormCheck,
+  CFormInput,
+  CInputGroup,
+  CTable,
+  CTableBody,
+  CTableDataCell,
+  CTableHead,
+  CTableHeaderCell,
+  CTableRow,
+  CInputGroupText,
+  CRow,
+  CContainer,
+  CFormLabel,
+  CFormTextarea,
+} from '@coreui/react'
 import { DocsExample } from 'src/components'
-
+import CIcon from '@coreui/icons-react'
+import {
+  cilBell,
+  cilCalculator,
+  cilChartPie,
+  cilCursor,
+  cilDescription,
+  cilDrop,
+  cilNotes,
+  cilPencil,
+  cilPuzzle,
+  cilSpeedometer,
+  cilStar,
+  cilUser,
+  cilCalendar,
+} from '@coreui/icons'
 const Badges = () => {
+  const [date, setDate] = useState('')
+  const [nameGeneric, setNameGeneric] = useState('')
+  const [concentration, setConcentration] = useState('')
+  const [route, setRoute] = useState('')
+  const [form, setForm] = useState('')
+  const [dosage, setDosage] = useState('')
+  const [duration, setDuration] = useState('')
+  const [quantity, setQuantity] = useState('')
+  const [notes, setNotes] = useState('')
+
+  const handleCreateAppointment = () => {
+    const formData = {
+      patient_id: 1,
+      date: date,
+      nameGeneric: nameGeneric,
+      concentration: concentration,
+      route: route,
+      form: form,
+      dosage: dosage,
+      duration: duration,
+      quantity: quantity,
+      notes: notes,
+    }
+    axios
+      .post('https://demo.habidd.com/api/ehr/orders/drug/create.php', formData)
+      .then((response) => {
+        console.log('Respuesta exitosa:', response.data)
+      })
+      .catch((error) => {
+        console.error('Error en la solicitud:', error)
+        console.log('CITA CREADO')
+      })
+  }
   return (
-    <CRow>
-      <CCol lg={6}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Badges</strong> <small>Dismissing</small>
-          </CCardHeader>
-          <CCardBody>
-            <p className="text-medium-emphasis small">
-              Bootstrap badge scale to suit the size of the parent element by using relative font
-              sizing and <code>em</code> units.
-            </p>
-            <DocsExample href="components/badge">
-              <h1>
-                Example heading <CBadge color="secondary">New</CBadge>
-              </h1>
-              <h2>
-                Example heading <CBadge color="secondary">New</CBadge>
-              </h2>
-              <h3>
-                Example heading <CBadge color="secondary">New</CBadge>
-              </h3>
-              <h4>
-                Example heading <CBadge color="secondary">New</CBadge>
-              </h4>
-              <h5>
-                Example heading <CBadge color="secondary">New</CBadge>
-              </h5>
-              <h6>
-                Example heading <CBadge color="secondary">New</CBadge>
-              </h6>
-            </DocsExample>
-            <p className="text-medium-emphasis small">
-              Badges can be used as part of links or buttons to provide a counter.
-            </p>
-            <DocsExample href="components/badge">
-              <CButton color="primary">
-                Notifications <CBadge color="secondary">4</CBadge>
-              </CButton>
-            </DocsExample>
-            <p className="text-medium-emphasis small">
-              Remark that depending on how you use them, badges may be complicated for users of
-              screen readers and related assistive technologies.
-            </p>
-            <p className="text-medium-emphasis small">
-              Unless the context is clear, consider including additional context with a visually
-              hidden piece of additional text.
-            </p>
-            <DocsExample href="components/badge">
-              <CButton color="primary">
-                Profile <CBadge color="secondary">9</CBadge>
-                <span className="visually-hidden">unread messages</span>
-              </CButton>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-      <CCol lg={6}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Badges</strong> <small>Contextual variations</small>
-          </CCardHeader>
-          <CCardBody>
-            <p className="text-medium-emphasis small">
-              Add any of the below-mentioned <code>color</code> props to modify the presentation of
-              a badge.
-            </p>
-            <DocsExample href="components/badge#contextual-variations">
-              <CBadge color="primary">primary</CBadge>
-              <CBadge color="success">success</CBadge>
-              <CBadge color="danger">danger</CBadge>
-              <CBadge color="warning">warning</CBadge>
-              <CBadge color="info">info</CBadge>
-              <CBadge color="light">light</CBadge>
-              <CBadge color="dark">dark</CBadge>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>React Badges</strong> <small>Pill badges</small>
-          </CCardHeader>
-          <CCardBody>
-            <p className="text-medium-emphasis small">
-              Apply the <code>shape=&#34;rounded-pill&#34;</code> prop to make badges rounded.
-            </p>
-            <DocsExample href="components/badge#pill-badges">
-              <CBadge color="primary" shape="rounded-pill">
-                primary
-              </CBadge>
-              <CBadge color="success" shape="rounded-pill">
-                success
-              </CBadge>
-              <CBadge color="danger" shape="rounded-pill">
-                danger
-              </CBadge>
-              <CBadge color="warning" shape="rounded-pill">
-                warning
-              </CBadge>
-              <CBadge color="info" shape="rounded-pill">
-                info
-              </CBadge>
-              <CBadge color="light" shape="rounded-pill">
-                light
-              </CBadge>
-              <CBadge color="dark" shape="rounded-pill">
-                dark
-              </CBadge>
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
+    <CContainer>
+      <CRow>
+        <CCol md={3}>
+          {' '}
+          <CButtonGroup vertical role="group" aria-label="Vertical button group">
+            <CButton color="primary" variant="ghost" href="#/buttons/button-groups">
+              Datos Personales
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/forms/checks-radios">
+              Consultas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/Forms/Floating-labels">
+              Anamnesis
+            </CButton>
+            <CButton color="primary" variant="ghost" text-align="end" href="#/base/breadcrumbs">
+              Examen Fisico
+            </CButton>
+            <CButton color="primary" variant="ghost" href="#/forms/Range">
+              Odontograma
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/navs">
+              Diagnosticos
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/forms/Select">
+              Evolucion
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/carousels">
+              Soportes
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/collapses">
+              Consentimiento informado
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/list-groups">
+              Ordenes medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts" active>
+              Plan de tratamiento
+            </CButton>
+          </CButtonGroup>
+        </CCol>
+        <CCol md={9}>
+          {' '}
+          <CCard className="mb-4">
+            <CCardHeader>
+              <strong>
+                <CIcon icon={cilUser} />
+                Preescripciones medicas
+              </strong>
+            </CCardHeader>
+            <CCardBody style={{ maxHeight: '400px', overflowY: 'auto' }}>
+              <CContainer>
+                <CRow className="p-2">
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Fecha</CFormLabel>{' '}
+                    </strong>
+                    <CFormInput
+                      type="Date"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setDate(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+
+                <CRow className="p-2">
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlTextarea1">
+                        Example textarea
+                      </CFormLabel>
+                    </strong>
+                    <CFormTextarea id="exampleFormControlTextarea1" rows={3}></CFormTextarea>
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CButton
+                      color="primary"
+                      href="/#/buttons/button-groups"
+                      onClick={() => {
+                        handleCreateAppointment()
+                      }}
+                    >
+                      Guardar preescripcion
+                    </CButton>
+                  </CCol>
+                </CRow>
+              </CContainer>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+    </CContainer>
   )
 }
 

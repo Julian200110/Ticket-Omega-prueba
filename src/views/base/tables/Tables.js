@@ -86,7 +86,7 @@ const Tables = () => {
             <CButton color="primary" variant="ghost" href="#/buttons/button-groups">
               Datos Personales
             </CButton>
-            <CButton color="primary" variant="ghost" href="/#/forms/checks-radios">
+            <CButton color="primary" variant="ghost" href="/#/forms/checks-radios" active>
               Consultas
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/Forms/Floating-labels">
@@ -101,7 +101,7 @@ const Tables = () => {
             <CButton color="primary" variant="ghost" href="/#/base/navs">
               Diagnosticos
             </CButton>
-            <CButton color="primary" variant="ghost" href="/#/forms/Select" active>
+            <CButton color="primary" variant="ghost" href="/#/forms/Select">
               Evolucion
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/base/carousels">
@@ -112,6 +112,12 @@ const Tables = () => {
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/base/list-groups">
               Ordenes medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
+              Plan de tratamiento
             </CButton>
           </CButtonGroup>
         </CCol>

@@ -106,8 +106,14 @@ const ListGroups = () => {
             <CButton color="primary" variant="ghost" href="/#/base/collapses">
               Consentimiento informado
             </CButton>
-            <CButton color="primary" variant="ghost" active href="/#/base/list-groups">
+            <CButton color="primary" variant="ghost" href="/#/base/list-groups" active>
               Ordenes medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
+              Plan de tratamiento
             </CButton>
           </CButtonGroup>
         </CCol>

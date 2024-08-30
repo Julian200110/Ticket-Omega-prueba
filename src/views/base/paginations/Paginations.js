@@ -148,7 +148,7 @@ const Paginations = () => {
                 <CRow className="p-2">
                   <CCol>
                     <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">Notas</CFormLabel>{' '}
+                      <CFormLabel htmlFor="exampleFormControlInput1">Observaciones</CFormLabel>{' '}
                     </strong>
                     <CFormInput type="text" id="exampleFormControlInput1" placeholder="" />
                   </CCol>

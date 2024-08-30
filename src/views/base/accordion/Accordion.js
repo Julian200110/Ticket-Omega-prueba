@@ -61,17 +61,22 @@ const Accordion = () => {
 
   const [fecha, setFecha] = useState([])
   const [nombre, setNombre] = useState([])
-  const [archivo, setArchivo] = useState([])
+  const [tipoDocumento, setTipoDocumento] = useState([])
+  const [numeroDocumento, setNumeroDocumento] = useState([])
+  const [Procedimiento, setProcedimiento] = useState([])
+  const [quienFirma, setQuienFirma] = useState([])
+  const [Profesional, setProfesional] = useState([])
   const handleCreateAppointment = () => {
     const formData = {
       patient_id: 1,
-      date: '02/08/2024',
-      requesterRelationShip: '1',
-      name: '1',
-      idType: '1',
-      idNumber: '1',
-      procedure_id: '1',
+      date: fecha,
+      requesterRelationShip: quienFirma,
+      name: nombre,
+      idType: 'CC',
+      idNumber: numeroDocumento,
+      procedure_id: Procedimiento,
       signature: url,
+      professional_id: Profesional,
     }
     axios
       .post('https://demo.habidd.com/api/ehr/authorization/informedconsent/create.php', formData)
@@ -120,6 +125,12 @@ const Accordion = () => {
             <CButton color="primary" variant="ghost" href="/#/base/list-groups">
               Ordenes medicas
             </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
+              Plan de tratamiento
+            </CButton>
           </CButtonGroup>
         </CCol>
         <CCol md={9}>
@@ -136,13 +147,23 @@ const Accordion = () => {
                   <strong>
                     <CFormLabel htmlFor="exampleFormControlInput1">Fecha</CFormLabel>{' '}
                   </strong>
-                  <CFormInput type="Date" id="exampleFormControlInput1" placeholder="" />
+                  <CFormInput
+                    type="Date"
+                    id="exampleFormControlInput1"
+                    placeholder=""
+                    onChange={(e) => setFecha(e.target.value)}
+                  />
                 </CCol>
                 <CCol>
                   <strong>
                     <CFormLabel htmlFor="exampleFormControlInput1">¿Quien Firma?</CFormLabel>{' '}
                   </strong>
-                  <CFormInput type="text" id="exampleFormControlInput1" placeholder="" />
+                  <CFormInput
+                    type="text"
+                    id="exampleFormControlInput1"
+                    placeholder=""
+                    onChange={(e) => setQuienFirma(e.target.value)}
+                  />
                 </CCol>
               </CRow>
               <CRow className="p-2">
@@ -150,7 +171,12 @@ const Accordion = () => {
                   <strong>
                     <CFormLabel htmlFor="exampleFormControlInput1">Nombre completo</CFormLabel>{' '}
                   </strong>
-                  <CFormInput type="text" id="exampleFormControlInput1" placeholder="" />
+                  <CFormInput
+                    type="text"
+                    id="exampleFormControlInput1"
+                    placeholder=""
+                    onChange={(e) => setNombre(e.target.value)}
+                  />
                 </CCol>
                 <CCol>
                   <strong>
@@ -158,7 +184,12 @@ const Accordion = () => {
                       Numero de identificacion
                     </CFormLabel>{' '}
                   </strong>
-                  <CFormInput type="text" id="exampleFormControlInput1" placeholder="" />
+                  <CFormInput
+                    type="text"
+                    id="exampleFormControlInput1"
+                    placeholder=""
+                    onChange={(e) => setNumeroDocumento(e.target.value)}
+                  />
                 </CCol>
               </CRow>
               <CRow className="p-2">
@@ -166,13 +197,23 @@ const Accordion = () => {
                   <strong>
                     <CFormLabel htmlFor="exampleFormControlInput1"> Procedimiento</CFormLabel>{' '}
                   </strong>
-                  <CFormInput type="text" id="exampleFormControlInput1" placeholder="" />
+                  <CFormInput
+                    type="text"
+                    id="exampleFormControlInput1"
+                    placeholder=""
+                    onChange={(e) => setProcedimiento(e.target.value)}
+                  />
                 </CCol>
                 <CCol>
                   <strong>
                     <CFormLabel htmlFor="exampleFormControlInput1">Profesional</CFormLabel>{' '}
                   </strong>
-                  <CFormInput type="text" id="exampleFormControlInput1" placeholder="" />
+                  <CFormInput
+                    type="text"
+                    id="exampleFormControlInput1"
+                    placeholder=""
+                    onChange={(e) => setProfesional(e.target.value)}
+                  />
                 </CCol>
               </CRow>
               <CRow className="p-2">

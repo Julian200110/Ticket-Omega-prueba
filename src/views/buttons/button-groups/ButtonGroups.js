@@ -43,18 +43,18 @@ const ButtonGroups = () => {
   function getAppointments() {
     const options = {
       method: 'GET',
-      url: 'https://demo.habidd.com/api/ehr/patients/list.php?institution=1',
+      url: 'https://demo.habidd.com/api/ehr/patients/get.php?institution=1&id=28',
     }
     axios
       .request(options)
       .then((response) => {
-        console.log(response.data.data[0])
+        console.log(response.data.data)
         console.log('golaa')
         return response
       })
       .then((responseData) => {
         if (responseData && responseData.data) {
-          setAppointments(responseData.data.data[0])
+          setAppointments(responseData.data.data)
         } else {
           setAppointments([])
         }
@@ -101,6 +101,12 @@ const ButtonGroups = () => {
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/base/list-groups">
               Ordenes medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
+              Plan de tratamiento
             </CButton>
           </CButtonGroup>
         </CCol>
@@ -181,7 +187,7 @@ const ButtonGroups = () => {
                 </CRow>
                 <CRow className="p-2">
                   <CCol>
-                    <strong>Notas</strong>
+                    <strong>Observaciones</strong>
                   </CCol>
                 </CRow>
                 <CRow className="p-2">

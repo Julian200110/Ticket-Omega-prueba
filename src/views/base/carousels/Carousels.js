@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {
   CButton,
@@ -45,15 +46,33 @@ import {
   cilCloudDownload,
 } from '@coreui/icons'
 const Carousels = () => {
-  function handleDownload() {
-    const pdfUrl = './SOAT.pdf' // Reemplaza esto con la URL real del archivo PDF
-    const link = document.createElement('a')
-    link.href = pdfUrl
-    link.setAttribute('download', 'SOAT.pdf') // Nombre del archivo al descargar
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+  const [appointments, setAppointments] = useState([])
+  function getAppointments() {
+    const options = {
+      method: 'GET',
+      url: 'https://demo.habidd.com/api/ehr/documents/list.php?patient_id=1',
+    }
+    axios
+      .request(options)
+      .then((response) => {
+        console.log(response.data.data)
+        console.log('golaa')
+        return response
+      })
+      .then((responseData) => {
+        if (responseData && responseData.data) {
+          setAppointments(responseData.data.data)
+        } else {
+          setAppointments([])
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
+  useEffect(() => {
+    getAppointments()
+  }, [])
   return (
     <CContainer>
       <CRow>
@@ -90,6 +109,12 @@ const Carousels = () => {
             <CButton color="primary" variant="ghost" href="/#/base/list-groups">
               Ordenes medicas
             </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
+              Plan de tratamiento
+            </CButton>
           </CButtonGroup>
         </CCol>
         <CCol md={9}>
@@ -109,16 +134,19 @@ const Carousels = () => {
                     <CTableHeaderCell scope="col">Fichero</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
+
                 <CTableBody>
-                  <CTableRow>
-                    <CTableHeaderCell scope="row">01/07/2024</CTableHeaderCell>
-                    <CTableDataCell>Radiografia</CTableDataCell>
-                    <CTableDataCell>
-                      <CButton>
-                        <CIcon icon={cilCloudDownload} />
-                      </CButton>
-                    </CTableDataCell>
-                  </CTableRow>
+                  {appointments.map((item, index) => (
+                    <CTableRow key={index}>
+                      <CTableHeaderCell>{item.date}</CTableHeaderCell>
+                      <CTableDataCell>{item.name}</CTableDataCell>
+                      <CTableDataCell>
+                        <CButton>
+                          <CIcon icon={cilCloudDownload} />
+                        </CButton>
+                      </CTableDataCell>
+                    </CTableRow>
+                  ))}
                 </CTableBody>
               </CTable>
               <CRow className="p-2 ">

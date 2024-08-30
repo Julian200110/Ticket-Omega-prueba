@@ -40,18 +40,18 @@ const Buttons = () => {
   function getAppointments() {
     const options = {
       method: 'GET',
-      url: 'https://demo.habidd.com/api/ehr/patients/list.php?institution=1',
+      url: 'https://demo.habidd.com/api/ehr/patients/get.php?institution=1&id=28',
     }
     axios
       .request(options)
       .then((response) => {
-        console.log(response.data.data[0])
+        console.log(response.data.data)
         console.log('golaa')
         return response
       })
       .then((responseData) => {
         if (responseData && responseData.data) {
-          setAppointments(responseData.data.data[0])
+          setAppointments(responseData.data.data)
         } else {
           setAppointments([])
         }
@@ -160,7 +160,7 @@ const Buttons = () => {
                 </CRow>
                 <CRow className="p-2">
                   <CCol>
-                    <strong>Notas</strong>
+                    <strong>Observaciones</strong>
                   </CCol>
                 </CRow>
                 <CRow className="p-2">
@@ -188,10 +188,10 @@ const Buttons = () => {
                   </CCol>
                 </CRow>
                 <CRow className="p-2">
-                  <CCol>Colombia</CCol>
-                  <CCol>Bogota d.c</CCol>
-                  <CCol>Bogota d.c</CCol>
-                  <CCol>Usaquen</CCol>
+                  <CCol>{appointments.country_id}</CCol>
+                  <CCol>{appointments.state_id}</CCol>
+                  <CCol>{appointments.city_id}</CCol>
+                  <CCol>{appointments.addressType}</CCol>
                 </CRow>
                 <CRow className="p-2">
                   <CCol>
@@ -208,10 +208,18 @@ const Buttons = () => {
                   </CCol>
                 </CRow>
                 <CRow className="p-2">
-                  <CCol>Calle 100 #32-56</CCol>
-                  <CCol>N/A</CCol>
-                  <CCol>3145896325</CCol>
-                  <CCol>alexander@gmail.com</CCol>
+                  <CCol>
+                    <strong>{appointments.adress}</strong>
+                  </CCol>
+                  <CCol>
+                    <strong>{appointments.phoneNumber}</strong>
+                  </CCol>
+                  <CCol>
+                    <strong>{appointments.phoneNumberMobile}</strong>
+                  </CCol>
+                  <CCol>
+                    <strong>{appointments.email}</strong>
+                  </CCol>
                 </CRow>
               </CContainer>
               <CContainer>
@@ -229,8 +237,8 @@ const Buttons = () => {
                   </CCol>
                 </CRow>
                 <CRow className="p-2">
-                  <CCol>Community Manager</CCol>
-                  <CCol>Coca Cola</CCol>
+                  <CCol>{appointments.occupation}</CCol>
+                  <CCol>{appointments.occupationCompanyName}</CCol>
                 </CRow>
               </CContainer>
               <CContainer>
@@ -251,9 +259,9 @@ const Buttons = () => {
                   </CCol>
                 </CRow>
                 <CRow className="p-2">
-                  <CCol>Maria Velasquez</CCol>
-                  <CCol>Hermana</CCol>
-                  <CCol>3189657425</CCol>
+                  <CCol>{appointments.companionName}</CCol>
+                  <CCol>{appointments.companionRelationShip}</CCol>
+                  <CCol>{appointments.companionPhoneNumber}</CCol>
                 </CRow>
               </CContainer>
               <CContainer>
@@ -274,9 +282,9 @@ const Buttons = () => {
                   </CCol>
                 </CRow>
                 <CRow className="p-2">
-                  <CCol>N/A</CCol>
-                  <CCol>N/A</CCol>
-                  <CCol>N/A</CCol>
+                  <CCol>{appointments.responsibleName}</CCol>
+                  <CCol>{appointments.responsibleRelationShip}</CCol>
+                  <CCol>{appointments.responsiblePhoneNumber}</CCol>
                 </CRow>
                 <CRow className="p-2">
                   <CCol>
@@ -287,8 +295,8 @@ const Buttons = () => {
                   </CCol>
                 </CRow>
                 <CRow className="p-2">
-                  <CCol>N/A</CCol>
-                  <CCol>N/A</CCol>
+                  <CCol>{appointments.responsibleIdType}</CCol>
+                  <CCol>{appointments.responsibleIdNumber}</CCol>
                 </CRow>
               </CContainer>
               <CContainer>
@@ -299,19 +307,19 @@ const Buttons = () => {
                 </CRow>
                 <CRow className="p-2">
                   <CCol>
-                    <strong>Numero Poliza</strong>
+                    <strong>Regimen</strong>
                   </CCol>
                   <CCol>
                     <strong>EPS</strong>
                   </CCol>
                   <CCol>
-                    <strong>dd</strong>
+                    <strong>Tipo de afiliacion</strong>
                   </CCol>
                 </CRow>
                 <CRow className="p-2">
-                  <CCol>375895</CCol>
-                  <CCol>Salud Total</CCol>
-                  <CCol>123456</CCol>
+                  <CCol>{appointments.socialsecurityaffiliation}</CCol>
+                  <CCol>{appointments.socialsecuritycompany_id}</CCol>
+                  <CCol>{appointments.affiliation}</CCol>
                 </CRow>
               </CContainer>
             </CCardBody>

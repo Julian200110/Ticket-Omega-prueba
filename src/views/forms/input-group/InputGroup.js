@@ -111,6 +111,12 @@ const Select = () => {
             <CButton color="primary" variant="ghost" href="/#/base/list-groups">
               Ordenes medicas
             </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
+              Plan de tratamiento
+            </CButton>
           </CButtonGroup>
         </CCol>
         <CCol>

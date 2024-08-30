@@ -51,11 +51,13 @@ const Validation = () => {
   const [nombre, setNombre] = useState([])
   const [archivo, setArchivo] = useState([])
   const handleCreateAppointment = () => {
-    const formData = {
-      patient_id: 1,
-      date: fecha,
-      name: nombre,
-      file: archivo,
+    const formData = new FormData()
+    formData.append('patient_id', 1)
+    formData.append('date', fecha)
+    formData.append('name', nombre)
+    formData.append('file', archivo)
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value)
     }
     axios
       .post('https://demo.habidd.com/api/ehr/documents/create.php', formData)
@@ -102,6 +104,12 @@ const Validation = () => {
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/base/list-groups">
               Ordenes medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
+              Plan de tratamiento
             </CButton>
           </CButtonGroup>
         </CCol>
@@ -151,7 +159,7 @@ const Validation = () => {
                       type="file"
                       id="exampleFormControlInput1"
                       placeholder=""
-                      onChange={(e) => setArchivo(e.target.value)}
+                      onChange={(e) => setArchivo(e.target.files[0])}
                     />
                   </CCol>
                 </CRow>
