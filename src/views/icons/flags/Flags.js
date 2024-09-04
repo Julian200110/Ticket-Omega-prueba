@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {
@@ -56,9 +57,10 @@ const CoreUIcons = () => {
   const [quantity, setQuantity] = useState('')
   const [notes, setNotes] = useState('')
 
+  const { selectedPatientId } = usePatientContext()
   const handleCreateAppointment = () => {
     const formData = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
       date: date,
       nameGeneric: nameGeneric,
       concentration: concentration,

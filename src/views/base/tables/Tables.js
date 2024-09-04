@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import {
   CButton,
@@ -43,6 +44,7 @@ import {
 } from '@coreui/icons'
 
 const Tables = () => {
+  const { selectedPatientId } = usePatientContext()
   const [fecha, setFecha] = useState([])
   const [hora, setHora] = useState([])
   const [tipoConsulta, setTipoConsulta] = useState([])
@@ -53,9 +55,10 @@ const Tables = () => {
   const [tipoDiagnosticoPrincipal, setTipoDiagnosticoPrincipal] = useState([])
   const [actividadRealizada, setActividadRealizada] = useState([])
   const [evolucion, setEvolucion] = useState([])
+
   const handleCreateAppointment = () => {
     const formData = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
       date: fecha,
       time: hora,
       procedure_id: tipoConsulta,

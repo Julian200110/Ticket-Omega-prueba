@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import {
   CButton,
@@ -52,9 +53,10 @@ const Progress = () => {
   const [patologia, setPatologia] = useState([])
   const [existe, setExiste] = useState([])
   const [observaciones, setObservaciones] = useState([])
+  const { selectedPatientId } = usePatientContext()
   const handleCreateAppointment = () => {
     const formData = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
       clinicalcondition_id: patologia,
       exists: existe,
       notes: observaciones,

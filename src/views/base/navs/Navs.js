@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {
@@ -47,10 +48,11 @@ import {
 
 const Navs = () => {
   const [appointments, setAppointments] = useState([])
+  const { selectedPatientId } = usePatientContext()
   function getAppointments() {
     const options = {
       method: 'GET',
-      url: 'https://demo.habidd.com/api/ehr/diagnostics/list.php?patient_id=1',
+      url: `https://demo.habidd.com/api/ehr/diagnostics/list.php?patient_id=${selectedPatientId}`,
     }
     axios
       .request(options)

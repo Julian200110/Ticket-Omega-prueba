@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import {
   CButton,
@@ -49,10 +50,11 @@ import {
 
 const Layout = () => {
   const [appointments, setAppointments] = useState([])
+  const { selectedPatientId } = usePatientContext()
   function getAppointments() {
     const options = {
       method: 'GET',
-      url: 'https://demo.habidd.com/api/ehr/anamnesis/drug/list.php?patient_id=1',
+      url: `https://demo.habidd.com/api/ehr/anamnesis/drug/list.php?patient_id=${selectedPatientId}`,
     }
     axios
       .request(options)

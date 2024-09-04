@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import {
@@ -52,9 +53,10 @@ const Placeholders = () => {
   const [procedimiento, setProcedimiento] = useState([])
   const [cantidad, setCantidad] = useState([])
   const [Observaciones, setObservaciones] = useState([])
+  const { selectedPatientId } = usePatientContext()
   const handleCreateAppointment = () => {
     const formData = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
       procedure_id: procedimiento,
       quantity: cantidad,
       notes: Observaciones,
@@ -164,7 +166,7 @@ const Placeholders = () => {
                   <CCol>
                     <CButton
                       color="primary"
-                      href="/#/base/list-groups"
+                      href="/#/buttons/button-groups"
                       onClick={() => {
                         handleCreateAppointment()
                       }}

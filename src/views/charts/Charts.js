@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../PatientContext'
 import axios from 'axios'
 import SignatureCanvas from 'react-signature-canvas'
 import {
@@ -58,9 +59,10 @@ const Charts = () => {
   const [fechaInicio, setFechaInicio] = useState([])
   const [fechaFin, setFechaFin] = useState([])
   const [observaciones, setObservaciones] = useState([])
+  const { selectedPatientId } = usePatientContext()
   const handleCreateAppointment = () => {
     const formData = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
       name: nombre,
       current: actual,
       dosage: posologia,

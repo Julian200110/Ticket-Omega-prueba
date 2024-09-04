@@ -20,17 +20,18 @@ import {
   CFormInput,
   CContainer,
 } from '@coreui/react'
-
+import { usePatientContext } from '../../../PatientContext' // Importa el hook personalizado
 const Colors = () => {
   const [appointments, setAppointments] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 10
+  const { selectedPatientId, setSelectedPatientId } = usePatientContext()
 
   function getAppointments() {
     const options = {
       method: 'GET',
-      url: 'https://demo.habidd.com/api/ehr/patients/list.php?institution=1',
+      url: `https://demo.habidd.com/api/ehr/patients/list.php?institution=1`,
     }
     axios
       .request(options)
@@ -69,7 +70,9 @@ const Colors = () => {
 
   // Cambiar de página
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
-
+  const handleViewDetails = (id) => {
+    setSelectedPatientId(id)
+  }
   return (
     <>
       <CContainer className="px-4">
@@ -91,7 +94,9 @@ const Colors = () => {
             </CForm>
           </CCol>
           <CCol className="p-3" align="end">
-            <CButton color="primary">Añadir paciente</CButton>
+            <CButton color="primary" href="/#/notifications/modals">
+              Añadir paciente
+            </CButton>
           </CCol>
         </CRow>
       </CContainer>
@@ -118,7 +123,9 @@ const Colors = () => {
               <CTableDataCell>{item.idType}</CTableDataCell>
               <CTableDataCell>{item.idNumber}</CTableDataCell>
               <CTableDataCell>
-                <a href="/#/buttons/buttons">Ver ficha</a>
+                <a href="/#/buttons/buttons" onClick={() => handleViewDetails(item.id)}>
+                  Ver ficha
+                </a>
               </CTableDataCell>
             </CTableRow>
           ))}

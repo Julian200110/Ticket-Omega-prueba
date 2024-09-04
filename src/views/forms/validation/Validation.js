@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {
@@ -50,9 +51,10 @@ const Validation = () => {
   const [fecha, setFecha] = useState([])
   const [nombre, setNombre] = useState([])
   const [archivo, setArchivo] = useState([])
+  const { selectedPatientId } = usePatientContext()
   const handleCreateAppointment = () => {
     const formData = new FormData()
-    formData.append('patient_id', 1)
+    formData.append('patient_id', selectedPatientId)
     formData.append('date', fecha)
     formData.append('name', nombre)
     formData.append('file', archivo)

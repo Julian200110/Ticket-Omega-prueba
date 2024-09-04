@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {
@@ -47,9 +48,11 @@ import {
 import imagen from './firma.png'
 const Collapses = () => {
   const [appointments, setAppointments] = useState([])
+  const { selectedPatientId } = usePatientContext()
+
   function getAppointments() {
     const params = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
     }
     const options = {
       method: 'GET',

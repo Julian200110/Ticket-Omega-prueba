@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import {
   CButton,
@@ -53,9 +54,10 @@ const Popovers = () => {
   const [pad, setPad] = useState([])
   const [peso, setPeso] = useState([])
   const [observaciones, setObservaciones] = useState([])
+  const { selectedPatientId } = usePatientContext()
   const handleCreateAppointment = () => {
     const formData = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
       date: fecha,
       systolicPressure: pas,
       diastolicPressure: pad,

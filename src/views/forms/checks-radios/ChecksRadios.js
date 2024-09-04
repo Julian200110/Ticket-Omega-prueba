@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import {
   CButton,
@@ -47,9 +48,10 @@ import {
 
 const ChecksRadios = () => {
   const [appointments, setAppointments] = useState([])
+  const { selectedPatientId } = usePatientContext()
   function getAppointments() {
     const params = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
     }
     const options = {
       method: 'GET',

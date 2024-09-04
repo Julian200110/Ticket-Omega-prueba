@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import {
   CButton,
@@ -48,15 +49,18 @@ import {
   cilUser,
   cilCalendar,
 } from '@coreui/icons'
+
 const Tooltips = () => {
+  const { selectedPatientId } = usePatientContext()
   const [nombre, setNombre] = useState([])
   const [actual, setActual] = useState([])
   const [fechaInicio, setFechaInicio] = useState([])
   const [fechaFin, setFechaFin] = useState([])
   const [observaciones, setObservaciones] = useState([])
+
   const handleCreateAppointment = () => {
     const formData = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
       name: nombre,
       current: actual,
       dateFrom: fechaInicio,

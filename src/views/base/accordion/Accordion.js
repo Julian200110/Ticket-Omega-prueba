@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import SignatureCanvas from 'react-signature-canvas'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -66,9 +67,10 @@ const Accordion = () => {
   const [Procedimiento, setProcedimiento] = useState([])
   const [quienFirma, setQuienFirma] = useState([])
   const [Profesional, setProfesional] = useState([])
+  const { selectedPatientId } = usePatientContext()
   const handleCreateAppointment = () => {
     const formData = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
       date: fecha,
       requesterRelationShip: quienFirma,
       name: nombre,

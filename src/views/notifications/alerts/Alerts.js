@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {
@@ -47,10 +48,11 @@ import {
 
 const Alerts = () => {
   const [appointments, setAppointments] = useState([])
+  const { selectedPatientId } = usePatientContext()
   function getAppointments() {
     const options = {
       method: 'GET',
-      url: 'https://demo.habidd.com/api/ehr/orders/drug/list.php?patient_id=1',
+      url: `https://demo.habidd.com/api/ehr/diagnostics/list.php?patient_id=${selectedPatientId}`,
     }
     axios
       .request(options)
@@ -135,16 +137,18 @@ const Alerts = () => {
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  <CTableRow>
-                    <CTableHeaderCell>2024-08-08</CTableHeaderCell>
-                    <CTableDataCell>Se debe seguir indicaciones</CTableDataCell>
-                  </CTableRow>
+                  {appointments.map((item, index) => (
+                    <CTableRow key={index}>
+                      <CTableHeaderCell>{item.date}</CTableHeaderCell>
+                      <CTableDataCell>{item.treatmentPlan}</CTableDataCell>
+                    </CTableRow>
+                  ))}
                 </CTableBody>
               </CTable>
               <CRow className="p-2">
                 <CCol>
-                  <CButton color="primary" href="#/notifications/badges">
-                    Agregar Preescripcion
+                  <CButton color="primary" href="#/base/spinners">
+                    Agregar tratamiento
                   </CButton>
                 </CCol>
               </CRow>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {
@@ -49,9 +50,10 @@ const Accordion = () => {
   const [fecha, setFecha] = useState([])
   const [diagnostico, setDiagnostico] = useState([])
   const [planTratamiento, setPlanTratamiento] = useState([])
+  const { selectedPatientId } = usePatientContext()
   const handleCreateAppointment = () => {
     const formData = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
       date: fecha,
       diagnosis: diagnostico,
       treatmentPlan: planTratamiento,

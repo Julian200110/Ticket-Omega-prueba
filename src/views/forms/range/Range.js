@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createRef } from 'react'
+import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
 import {
   CButton,
@@ -46,6 +47,7 @@ import Teeth from '../../../components/Teeth'
 import { useScreenshot } from 'use-react-screenshot'
 
 const Range = () => {
+  const { selectedPatientId } = usePatientContext()
   const [odontogramState, setOdontogramState] = useState({})
   const ref = createRef(null)
   const [width, setWidth] = useState(300)
@@ -123,7 +125,7 @@ const Range = () => {
   const sendOdontogramData = () => {
     const toothData = getToothData()
     const odontogramData = {
-      patient_id: 1,
+      patient_id: selectedPatientId,
       date: '2024-08-13',
       moment: 'Mañana',
       tooths: toothData, // Cambiar a "tooths" en lugar de "tooths" si es el nombre correcto
