@@ -52,16 +52,18 @@ const Colors = () => {
   }, [])
 
   // Filtra los appointments según el término de búsqueda
-  const filteredAppointments = appointments.filter((item) => {
-    const fullName =
-      `${item.nameFirst} ${item.nameSecond} ${item.surnameFirst} ${item.surnameSecond}`.toLowerCase()
-    return (
-      fullName.includes(searchTerm.toLowerCase()) ||
-      item.idNumber.includes(searchTerm) ||
-      item.idType.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.genre.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  })
+  const filteredAppointments = appointments
+    .filter((item) => {
+      const fullName =
+        `${item.nameFirst} ${item.nameSecond} ${item.surnameFirst} ${item.surnameSecond}`.toLowerCase()
+      return (
+        fullName.includes(searchTerm.toLowerCase()) ||
+        item.idNumber.includes(searchTerm) ||
+        item.idType.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.genre.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    })
+    .sort((b, a) => new Date(a.birthday) - new Date(b.birthday)) // Ordena por fecha de nacimiento
 
   // Calcular los datos para la página actual
   const indexOfLastItem = currentPage * itemsPerPage

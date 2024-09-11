@@ -18,6 +18,7 @@ import {
   CCardFooter,
   CFormInput,
   CFormLabel,
+  CFormSelect,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { Link } from 'react-router-dom'
@@ -132,6 +133,25 @@ const Modals = () => {
         console.log('CITA CREADO')
       })
   }
+
+  const handleChange = (e) => {
+    const value = e.target.value
+
+    // Validar que el valor solo contenga letras, números, puntos, guiones, y arroba
+    const formattedValue = value.replace(/[^a-zA-Z0-9._@-]/g, '')
+
+    // Actualizar el estado con el valor formateado
+    setEmail(formattedValue)
+  }
+
+  // Dividir el valor en parte local y dominio
+  const [localPart, domainPart] = email.split('@')
+
+  // Si no hay dominio, usamos el dominio por defecto
+  const domain = domainPart ? domainPart : ''
+
+  // Mostrar el valor del campo de entrada como "local@domain"
+  const displayValue = `${localPart ? localPart : ''}@${domain}`
   return (
     <CContainer className="px-4">
       <CRow>
@@ -263,23 +283,30 @@ const Modals = () => {
                     <strong>
                       <CFormLabel htmlFor="exampleFormControlInput1">Sexo</CFormLabel>{' '}
                     </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
+                    <CFormSelect
+                      aria-label="Default select example"
                       onChange={(e) => setGenre(e.target.value)}
-                    />
+                    >
+                      <option></option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Femenino">Femenino</option>
+                      <option value="No refiere">No refiere</option>
+                      <option value="Otro">Otro</option>
+                    </CFormSelect>
                   </CCol>
                   <CCol>
                     <strong>
                       <CFormLabel htmlFor="exampleFormControlInput1">Estado Civil</CFormLabel>{' '}
                     </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
+                    <CFormSelect
+                      aria-label="Default select example"
                       onChange={(e) => setFamilyStatus(e.target.value)}
-                    />
+                    >
+                      <option></option>
+                      <option value="Casado">Casado/a</option>
+                      <option value="Soltero">Soltero/a</option>
+                      <option value="Viudo">Viudo/a</option>
+                    </CFormSelect>
                   </CCol>
                   <CCol>
                     <strong>
@@ -352,12 +379,14 @@ const Modals = () => {
                     <strong>
                       <CFormLabel htmlFor="exampleFormControlInput1">Zona de residencia</CFormLabel>{' '}
                     </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
+                    <CFormSelect
+                      aria-label="Default select example"
                       onChange={(e) => setAddressType(e.target.value)}
-                    />
+                    >
+                      <option></option>
+                      <option value="Urbano">Urbano</option>
+                      <option value="Rural">Rural</option>
+                    </CFormSelect>
                   </CCol>
                 </CRow>
 
@@ -375,7 +404,7 @@ const Modals = () => {
                   </CCol>
                   <CCol>
                     <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">Telefono</CFormLabel>{' '}
+                      <CFormLabel htmlFor="exampleFormControlInput1">Telefono Fijo</CFormLabel>{' '}
                     </strong>
                     <CFormInput
                       type="text"
@@ -400,10 +429,12 @@ const Modals = () => {
                       <CFormLabel htmlFor="exampleFormControlInput1">Email</CFormLabel>{' '}
                     </strong>
                     <CFormInput
-                      type="email"
+                      type="text"
                       id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setEmail(e.target.value)}
+                      value={displayValue}
+                      placeholder="Introduce tu correo"
+                      onChange={handleChange}
+                      className="custom-email-input"
                     />
                   </CCol>
                 </CRow>
@@ -417,7 +448,7 @@ const Modals = () => {
                 <CRow className="p-2">
                   <CCol>
                     <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">Cargo</CFormLabel>{' '}
+                      <CFormLabel htmlFor="exampleFormControlInput1">Ocupacion</CFormLabel>{' '}
                     </strong>
                     <CFormInput
                       type="text"
@@ -426,19 +457,7 @@ const Modals = () => {
                       onChange={(e) => setOccupation(e.target.value)}
                     />
                   </CCol>
-                  <CCol>
-                    <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">
-                        Nombre de la empresa
-                      </CFormLabel>{' '}
-                    </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setOccupationCompanyName(e.target.value)}
-                    />
-                  </CCol>
+                  <CCol></CCol>
                 </CRow>
               </CContainer>
               <CContainer>
@@ -459,17 +478,7 @@ const Modals = () => {
                       onChange={(e) => setCompanionName(e.target.value)}
                     />
                   </CCol>
-                  <CCol>
-                    <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">Parentesco</CFormLabel>{' '}
-                    </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setCompanionRelationShip(e.target.value)}
-                    />
-                  </CCol>
+
                   <CCol>
                     <strong>
                       <CFormLabel htmlFor="exampleFormControlInput1">Telefono</CFormLabel>{' '}
@@ -524,33 +533,6 @@ const Modals = () => {
                     />
                   </CCol>
                 </CRow>
-
-                <CRow className="p-2">
-                  <CCol>
-                    <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">Tipo de documento</CFormLabel>{' '}
-                    </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setResponsibleIdType(e.target.value)}
-                    />
-                  </CCol>
-                  <CCol>
-                    <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">
-                        Numero de documento
-                      </CFormLabel>{' '}
-                    </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setResponsibleIdNumber(e.target.value)}
-                    />
-                  </CCol>
-                </CRow>
               </CContainer>
               <CContainer>
                 <CRow>
@@ -559,17 +541,6 @@ const Modals = () => {
                   </CCol>
                 </CRow>
                 <CRow className="p-2">
-                  <CCol>
-                    <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">Numero Poliza</CFormLabel>{' '}
-                    </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setSocialSecurityAffiliation(e.target.value)}
-                    />
-                  </CCol>
                   <CCol>
                     <strong>
                       <CFormLabel htmlFor="exampleFormControlInput1">EPS</CFormLabel>{' '}
@@ -583,14 +554,19 @@ const Modals = () => {
                   </CCol>
                   <CCol>
                     <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">Tipo de afiliacion</CFormLabel>{' '}
+                      <CFormLabel htmlFor="exampleFormControlInput1">
+                        Tipo de vinculacion
+                      </CFormLabel>{' '}
                     </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
+                    <CFormSelect
+                      aria-label="Default select example"
                       onChange={(e) => setAffiliation(e.target.value)}
-                    />
+                    >
+                      <option></option>
+                      <option value="Beneficiario">Beneficiario</option>
+                      <option value="Subsidiado">Subsidiado</option>
+                      <option value="Independiente">Independiente</option>
+                    </CFormSelect>
                   </CCol>
                 </CRow>
               </CContainer>

@@ -163,7 +163,7 @@ const Range = () => {
               Odontograma
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/base/navs">
-              Diagnosticos
+              Diagnosticos y Planes de tratamiento
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/forms/Select">
               Evolucion
@@ -179,9 +179,6 @@ const Range = () => {
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
               Preescripciones medicas
-            </CButton>
-            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
-              Plan de tratamiento
             </CButton>
           </CButtonGroup>
         </CCol>

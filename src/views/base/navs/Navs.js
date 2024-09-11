@@ -97,7 +97,7 @@ const Navs = () => {
               Odontograma
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/base/navs" active>
-              Diagnosticos
+              Diagnosticos y Planes de tratamiento
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/forms/Select">
               Evolucion
@@ -114,9 +114,6 @@ const Navs = () => {
             <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
               Preescripciones medicas
             </CButton>
-            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
-              Plan de tratamiento
-            </CButton>
           </CButtonGroup>
         </CCol>
         <CCol md={9}>
@@ -125,7 +122,7 @@ const Navs = () => {
             <CCardHeader>
               <strong>
                 <CIcon icon={cilUser} />
-                Diagnosticos
+                Diagnosticos y Planes de tratamiento
               </strong>
             </CCardHeader>
             <CCardBody style={{ maxHeight: '400px', overflowY: 'auto' }}>

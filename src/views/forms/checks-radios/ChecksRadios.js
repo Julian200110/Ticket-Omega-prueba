@@ -101,7 +101,7 @@ const ChecksRadios = () => {
               Odontograma
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/base/navs">
-              Diagnosticos
+              Diagnosticos y Planes de tratamiento
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/forms/Select">
               Evolucion
@@ -117,9 +117,6 @@ const ChecksRadios = () => {
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
               Preescripciones medicas
-            </CButton>
-            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
-              Plan de tratamiento
             </CButton>
           </CButtonGroup>
         </CCol>
@@ -137,7 +134,7 @@ const ChecksRadios = () => {
                   <CTableRow>
                     <CTableHeaderCell scope="col">Fecha</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Hora</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Razon principal</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Motivo Consulta</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
 

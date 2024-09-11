@@ -24,6 +24,8 @@ import {
   CPaginationItem,
   CCardFooter,
   CFormLabel,
+  CFormTextarea,
+  CFormSelect,
 } from '@coreui/react'
 import { DocsExample } from 'src/components'
 import CIcon from '@coreui/icons-react'
@@ -102,7 +104,7 @@ const Tables = () => {
               Odontograma
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/base/navs">
-              Diagnosticos
+              Diagnosticos y Planes de tratamiento
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/forms/Select">
               Evolucion
@@ -118,9 +120,6 @@ const Tables = () => {
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
               Preescripciones medicas
-            </CButton>
-            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
-              Plan de tratamiento
             </CButton>
           </CButtonGroup>
         </CCol>
@@ -163,109 +162,35 @@ const Tables = () => {
                     <strong>
                       <CFormLabel htmlFor="exampleFormControlInput1">Tipo de consulta</CFormLabel>{' '}
                     </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
+                    <CFormSelect
+                      aria-label="Default select example"
                       onChange={(e) => setTipoConsulta(e.target.value)}
-                    />
+                    >
+                      <option></option>
+                      <option value="Primera vez">Primera vez</option>
+                      <option value="Control">Control</option>
+                      <option value="Urgencia">Control</option>
+                      <option value="Finalizacion de tratamiento">
+                        Finalizacion de tratamiento
+                      </option>
+                      <option value="Valoracion">Valoracion</option>
+                      <option value="Inicio de tratamiento ">Inicio de tratamiento </option>
+                    </CFormSelect>
                   </CCol>
                 </CRow>
 
                 <CRow className="p-2">
-                  <CCol>
-                    <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">
-                        Finalidad de la consulta
-                      </CFormLabel>{' '}
-                    </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setFinalidadConsulta(e.target.value)}
-                    />
-                  </CCol>
                   <CCol>
                     <strong>
                       <CFormLabel htmlFor="exampleFormControlInput1">
                         Motivo de consulta{' '}
                       </CFormLabel>{' '}
                     </strong>
-                    <CFormInput
+                    <CFormTextarea
                       type="text"
                       id="exampleFormControlInput1"
                       placeholder=""
                       onChange={(e) => setMotivoConsulta(e.target.value)}
-                    />
-                  </CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>
-                    <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">Causa externa </CFormLabel>{' '}
-                    </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setCausaExterna(e.target.value)}
-                    />
-                  </CCol>
-
-                  <CCol>
-                    <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">
-                        Diagnostico principal{' '}
-                      </CFormLabel>{' '}
-                    </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setDiagnosticoPrincipal(e.target.value)}
-                    />
-                  </CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>
-                    <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">
-                        Tipo de diagnóstico principal{' '}
-                      </CFormLabel>{' '}
-                    </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setTipoDiagnosticoPrincipal(e.target.value)}
-                    />
-                  </CCol>
-
-                  <CCol>
-                    <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">
-                        Actividad realizada{' '}
-                      </CFormLabel>{' '}
-                    </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setActividadRealizada(e.target.value)}
-                    />
-                  </CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>
-                    <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">Evolucion</CFormLabel>{' '}
-                    </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
-                      onChange={(e) => setEvolucion(e.target.value)}
                     />
                   </CCol>
                 </CRow>
