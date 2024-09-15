@@ -103,7 +103,7 @@ const Typography = () => {
               Odontograma
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/base/navs">
-              Diagnosticos
+              Diagnosticos y Planes de tratamiento
             </CButton>
             <CButton color="primary" variant="ghost" active href="/#/forms/Select">
               Evolucion

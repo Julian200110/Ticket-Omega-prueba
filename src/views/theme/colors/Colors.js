@@ -63,7 +63,7 @@ const Colors = () => {
         item.genre.toLowerCase().includes(searchTerm.toLowerCase())
       )
     })
-    .sort((b, a) => new Date(a.birthday) - new Date(b.birthday)) // Ordena por fecha de nacimiento
+    .sort((b, a) => new Date(a.id) - new Date(b.id)) // Ordena por fecha de nacimiento
 
   // Calcular los datos para la página actual
   const indexOfLastItem = currentPage * itemsPerPage

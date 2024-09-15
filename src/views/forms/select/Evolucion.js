@@ -143,7 +143,7 @@ const Select = () => {
               </CContainer>
               <CRow className="p-2">
                 <CCol>
-                  <CButton color="primary" href="#/base/tables">
+                  <CButton color="primary" href="/#/theme/typography">
                     Agregar Evolucion
                   </CButton>
                 </CCol>
