@@ -1,188 +1,294 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { CWidgetStatsD, CRow, CCol } from '@coreui/react'
+import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../PatientContext'
+import axios from 'axios'
+import {
+  CButton,
+  CDropdown,
+  CDropdownDivider,
+  CDropdownItem,
+  CDropdownMenu,
+  CDropdownToggle,
+  CButtonGroup,
+  CButtonToolbar,
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCol,
+  CFormCheck,
+  CFormInput,
+  CInputGroup,
+  CInputGroupText,
+  CRow,
+  CContainer,
+  CPagination,
+  CPaginationItem,
+  CCardFooter,
+  CFormLabel,
+} from '@coreui/react'
+import { DocsExample } from 'src/components'
 import CIcon from '@coreui/icons-react'
-import { cibFacebook, cibLinkedin, cibTwitter, cilCalendar } from '@coreui/icons'
-import { CChart } from '@coreui/react-chartjs'
+import {
+  cilBell,
+  cilCalculator,
+  cilChartPie,
+  cilCursor,
+  cilDescription,
+  cilDrop,
+  cilNotes,
+  cilPencil,
+  cilPuzzle,
+  cilSpeedometer,
+  cilStar,
+  cilUser,
+  cilCalendar,
+} from '@coreui/icons'
 
-const WidgetsBrand = ({ withCharts }) => {
-  const chartOptions = {
-    elements: {
-      line: {
-        tension: 0.4,
-      },
-      point: {
-        radius: 0,
-        hitRadius: 10,
-        hoverRadius: 4,
-        hoverBorderWidth: 3,
-      },
-    },
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-    scales: {
-      x: {
-        display: false,
-      },
-      y: {
-        display: false,
-      },
-    },
+const WidgetsBrand = () => {
+  const { selectedPatientId } = usePatientContext()
+  const [fecha, setFecha] = useState([])
+  const [hora, setHora] = useState([])
+  const [tipoConsulta, setTipoConsulta] = useState([])
+  const [finalidadConsulta, setFinalidadConsulta] = useState([])
+  const [motivoConsulta, setMotivoConsulta] = useState([])
+  const [causaExterna, setCausaExterna] = useState([])
+  const [diagnosticoPrincipal, setDiagnosticoPrincipal] = useState([])
+  const [tipoDiagnosticoPrincipal, setTipoDiagnosticoPrincipal] = useState([])
+  const [actividadRealizada, setActividadRealizada] = useState([])
+  const [evolucion, setEvolucion] = useState([])
+
+  const handleCreateAppointment = () => {
+    const formData = {
+      patient_id: selectedPatientId,
+      date: fecha,
+      time: hora,
+      procedure_id: tipoConsulta,
+      reason: finalidadConsulta,
+      reasonText: motivoConsulta,
+      cause: causaExterna,
+      diagnosisMain_id: diagnosticoPrincipal,
+      diagnosisType: tipoDiagnosticoPrincipal,
+      evolution: evolucion,
+      actions: actividadRealizada,
+    }
+    axios
+      .post('https://demo.habidd.com/api/ehr/evolution/create.php', formData)
+      .then((response) => {
+        console.log('Respuesta exitosa:', response.data)
+      })
+      .catch((error) => {
+        console.error('Error en la solicitud:', error)
+        console.log('CITA CREADO')
+      })
   }
-
   return (
-    <CRow>
-      <CCol sm={6} lg={3}>
-        <CWidgetStatsD
-          className="mb-4"
-          {...(withCharts && {
-            chart: (
-              <CChart
-                className="position-absolute w-100 h-100"
-                type="line"
-                data={{
-                  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                  datasets: [
-                    {
-                      backgroundColor: 'rgba(255,255,255,.1)',
-                      borderColor: 'rgba(255,255,255,.55)',
-                      pointHoverBackgroundColor: '#fff',
-                      borderWidth: 2,
-                      data: [65, 59, 84, 84, 51, 55, 40],
-                      fill: true,
-                    },
-                  ],
-                }}
-                options={chartOptions}
-              />
-            ),
-          })}
-          icon={<CIcon icon={cibFacebook} height={52} className="my-4 text-white" />}
-          values={[
-            { title: 'friends', value: '89K' },
-            { title: 'feeds', value: '459' },
-          ]}
-          style={{
-            '--cui-card-cap-bg': '#3b5998',
-          }}
-        />
-      </CCol>
+    <CContainer>
+      <CRow>
+        <CCol md={3}>
+          {' '}
+          <CButtonGroup vertical role="group" aria-label="Vertical button group">
+            <CButton color="primary" variant="ghost" href="#/buttons/button-groups">
+              Datos Personales
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/forms/checks-radios" active>
+              Consultas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/Forms/Floating-labels">
+              Anamnesis
+            </CButton>
+            <CButton color="primary" variant="ghost" text-align="end" href="#/base/breadcrumbs">
+              Examen Fisico
+            </CButton>
+            <CButton color="primary" variant="ghost" href="#/forms/Range">
+              Odontograma
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/navs">
+              Diagnosticos
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/forms/Select">
+              Evolucion
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/carousels">
+              Soportes
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/collapses">
+              Consentimiento informado
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/list-groups">
+              Ordenes medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/notifications/alerts">
+              Plan de tratamiento
+            </CButton>
+          </CButtonGroup>
+        </CCol>
+        <CCol>
+          {' '}
+          <CCard className="mb-4">
+            <CCardHeader>
+              <strong>
+                <CIcon icon={cilUser} />
+                Evolucion
+              </strong>
+            </CCardHeader>
+            <CCardBody md={9} style={{ maxHeight: '400px', overflowY: 'auto' }}>
+              {' '}
+              <CContainer>
+                <CRow className="p-2">
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Fecha</CFormLabel>{' '}
+                    </strong>
+                    <CFormInput
+                      type="date"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setFecha(e.target.value)}
+                    />
+                  </CCol>
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Hora</CFormLabel>{' '}
+                    </strong>
+                    <CFormInput
+                      type="Time"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setHora(e.target.value)}
+                    />
+                  </CCol>
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Tipo de consulta</CFormLabel>{' '}
+                    </strong>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
 
-      <CCol sm={6} lg={3}>
-        <CWidgetStatsD
-          className="mb-4"
-          {...(withCharts && {
-            chart: (
-              <CChart
-                className="position-absolute w-100 h-100"
-                type="line"
-                data={{
-                  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                  datasets: [
-                    {
-                      backgroundColor: 'rgba(255,255,255,.1)',
-                      borderColor: 'rgba(255,255,255,.55)',
-                      pointHoverBackgroundColor: '#fff',
-                      borderWidth: 2,
-                      data: [1, 13, 9, 17, 34, 41, 38],
-                      fill: true,
-                    },
-                  ],
-                }}
-                options={chartOptions}
-              />
-            ),
-          })}
-          icon={<CIcon icon={cibTwitter} height={52} className="my-4 text-white" />}
-          values={[
-            { title: 'followers', value: '973k' },
-            { title: 'tweets', value: '1.792' },
-          ]}
-          style={{
-            '--cui-card-cap-bg': '#00aced',
-          }}
-        />
-      </CCol>
+                <CRow className="p-2">
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">
+                        Finalidad de la consulta
+                      </CFormLabel>{' '}
+                    </strong>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setFinalidadConsulta(e.target.value)}
+                    />
+                  </CCol>
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">
+                        Motivo de consulta{' '}
+                      </CFormLabel>{' '}
+                    </strong>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Causa externa </CFormLabel>{' '}
+                    </strong>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setCausaExterna(e.target.value)}
+                    />
+                  </CCol>
 
-      <CCol sm={6} lg={3}>
-        <CWidgetStatsD
-          className="mb-4"
-          {...(withCharts && {
-            chart: (
-              <CChart
-                className="position-absolute w-100 h-100"
-                type="line"
-                data={{
-                  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                  datasets: [
-                    {
-                      backgroundColor: 'rgba(255,255,255,.1)',
-                      borderColor: 'rgba(255,255,255,.55)',
-                      pointHoverBackgroundColor: '#fff',
-                      borderWidth: 2,
-                      data: [78, 81, 80, 45, 34, 12, 40],
-                      fill: true,
-                    },
-                  ],
-                }}
-                options={chartOptions}
-              />
-            ),
-          })}
-          icon={<CIcon icon={cibLinkedin} height={52} className="my-4 text-white" />}
-          values={[
-            { title: 'contacts', value: '500' },
-            { title: 'feeds', value: '1.292' },
-          ]}
-          style={{
-            '--cui-card-cap-bg': '#4875b4',
-          }}
-        />
-      </CCol>
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">
+                        Diagnostico principal{' '}
+                      </CFormLabel>{' '}
+                    </strong>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setDiagnosticoPrincipal(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">
+                        Tipo de diagnóstico principal{' '}
+                      </CFormLabel>{' '}
+                    </strong>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setTipoDiagnosticoPrincipal(e.target.value)}
+                    />
+                  </CCol>
 
-      <CCol sm={6} lg={3}>
-        <CWidgetStatsD
-          className="mb-4"
-          color="warning"
-          {...(withCharts && {
-            chart: (
-              <CChart
-                className="position-absolute w-100 h-100"
-                type="line"
-                data={{
-                  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                  datasets: [
-                    {
-                      backgroundColor: 'rgba(255,255,255,.1)',
-                      borderColor: 'rgba(255,255,255,.55)',
-                      pointHoverBackgroundColor: '#fff',
-                      borderWidth: 2,
-                      data: [35, 23, 56, 22, 97, 23, 64],
-                      fill: true,
-                    },
-                  ],
-                }}
-                options={chartOptions}
-              />
-            ),
-          })}
-          icon={<CIcon icon={cilCalendar} height={52} className="my-4 text-white" />}
-          values={[
-            { title: 'events', value: '12+' },
-            { title: 'meetings', value: '4' },
-          ]}
-        />
-      </CCol>
-    </CRow>
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">
+                        Actividad realizada{' '}
+                      </CFormLabel>{' '}
+                    </strong>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setActividadRealizada(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Evolucion</CFormLabel>{' '}
+                    </strong>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setEvolucion(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CButton
+                      color="primary"
+                      href="/#/buttons/button-groups"
+                      onClick={() => {
+                        handleCreateAppointment()
+                      }}
+                    >
+                      Guardar consulta
+                    </CButton>
+                  </CCol>
+                </CRow>
+              </CContainer>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+    </CContainer>
   )
-}
-
-WidgetsBrand.propTypes = {
-  withCharts: PropTypes.bool,
 }
 
 export default WidgetsBrand

@@ -141,6 +141,13 @@ const Select = () => {
                   </ul>
                 </CCol>
               </CContainer>
+              <CRow className="p-2">
+                <CCol>
+                  <CButton color="primary" href="#/base/tables">
+                    Agregar Evolucion
+                  </CButton>
+                </CCol>
+              </CRow>
             </CCardBody>
           </CCard>
         </CCol>

@@ -152,7 +152,7 @@ const Popovers = () => {
                   </CCol>
                   <CCol>
                     <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">PAS</CFormLabel>{' '}
+                      <CFormLabel htmlFor="exampleFormControlInput1">Presion Arterial</CFormLabel>{' '}
                     </strong>
                     <CFormInput
                       type="text"
@@ -165,7 +165,9 @@ const Popovers = () => {
                 <CRow className="p-2">
                   <CCol>
                     <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">PAD</CFormLabel>{' '}
+                      <CFormLabel htmlFor="exampleFormControlInput1">
+                        Frecuencia Cardiaca
+                      </CFormLabel>{' '}
                     </strong>
                     <CFormInput
                       type="text"
@@ -176,7 +178,7 @@ const Popovers = () => {
                   </CCol>
                   <CCol>
                     <strong>
-                      <CFormLabel htmlFor="exampleFormControlInput1">Peso (Kg)</CFormLabel>{' '}
+                      <CFormLabel htmlFor="exampleFormControlInput1">Temperatura</CFormLabel>{' '}
                     </strong>
                     <CFormInput
                       type="text"
@@ -184,6 +186,12 @@ const Popovers = () => {
                       placeholder=""
                       onChange={(e) => setPeso(e.target.value)}
                     />
+                  </CCol>
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Respiracion</CFormLabel>{' '}
+                    </strong>
+                    <CFormInput type="text" id="exampleFormControlInput1" placeholder="" />
                   </CCol>
                 </CRow>
                 <CRow className="p-2">

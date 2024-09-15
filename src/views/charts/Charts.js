@@ -125,9 +125,9 @@ const Charts = () => {
           {' '}
           <CPagination aria-label="Page navigation example" align="center">
             <CPaginationItem href="#/forms/floating-labels">Ant fam y per</CPaginationItem>
-            <CPaginationItem href="#/forms/input-group">Condiciones Clinicas</CPaginationItem>
+            <CPaginationItem href="#/forms/input-group">Condicion Medica Actual</CPaginationItem>
             <CPaginationItem active href="#/forms/layout">
-              medicamentos
+              Uso de Medicamentos
             </CPaginationItem>
           </CPagination>
           <CCard className="mb-4">

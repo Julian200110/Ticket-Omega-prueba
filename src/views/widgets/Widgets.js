@@ -130,8 +130,8 @@ const Widgets = () => {
             <CPaginationItem active href="#/base/breadcrumbs">
               Ant fam y per
             </CPaginationItem>
-            <CPaginationItem href="#/forms/input-group">Condiciones Clinicas</CPaginationItem>
-            <CPaginationItem href="#/forms/layout">medicamentos</CPaginationItem>
+            <CPaginationItem href="#/forms/input-group">Condicion Medica Actual</CPaginationItem>
+            <CPaginationItem href="#/forms/layout">Uso de Medicamentos</CPaginationItem>
           </CPagination>
           <CCard className="mb-4">
             <CCardHeader>

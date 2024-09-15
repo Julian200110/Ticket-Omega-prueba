@@ -144,9 +144,10 @@ const Breadcrumbs = () => {
                 <CTableHead color="primary">
                   <CTableRow>
                     <CTableHeaderCell scope="col">Fecha</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">PAS</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">PAD</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">PESO (KG)</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Presion Arterial</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Frecuencia Cardiaca</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Temperatura</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Respiracion</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Observaciones</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
@@ -158,6 +159,7 @@ const Breadcrumbs = () => {
 
                       <CTableDataCell>{item.diastolicPressure}</CTableDataCell>
                       <CTableDataCell>{item.weight}</CTableDataCell>
+                      <CTableDataCell></CTableDataCell>
                       <CTableDataCell>{item.notes}</CTableDataCell>
                     </CTableRow>
                   ))}

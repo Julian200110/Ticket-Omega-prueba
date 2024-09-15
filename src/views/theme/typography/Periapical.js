@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react'
 import { usePatientContext } from '../../../PatientContext'
 import axios from 'axios'
@@ -48,7 +49,7 @@ import {
   cilCalendar,
   cilCloudDownload,
 } from '@coreui/icons'
-const Carousels = () => {
+const Periapical = () => {
   const [appointments, setAppointments] = useState([])
   const { selectedPatientId } = usePatientContext()
   function getAppointments() {
@@ -121,11 +122,11 @@ const Carousels = () => {
         <CCol md={9}>
           {' '}
           <CPagination aria-label="Page navigation example" align="center">
-            <CPaginationItem active href="#/base/carousels">
-              Laboratorios clinicos
-            </CPaginationItem>
+            <CPaginationItem href="#/base/carousels">Laboratorios clinicos</CPaginationItem>
             <CPaginationItem href="#/panoramica">Radiografia panoramica</CPaginationItem>
-            <CPaginationItem href="#/periapical">Radiografia periapical</CPaginationItem>
+            <CPaginationItem href="#/periapical" active>
+              Radiografia periapical
+            </CPaginationItem>
             <CPaginationItem href="#/coronal">Radiografia coronal</CPaginationItem>
             <CPaginationItem href="#/tomografia">Tomografia</CPaginationItem>
           </CPagination>
@@ -174,4 +175,4 @@ const Carousels = () => {
   )
 }
 
-export default Carousels
+export default Periapical

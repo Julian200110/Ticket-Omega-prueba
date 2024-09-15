@@ -79,7 +79,8 @@ const Modals = () => {
   const [contactedEmail, setContactedEmail] = useState(false)
   const [contactedSms, setContactedSms] = useState(false)
   const [contactedPhone, setContactedPhone] = useState(false)
-
+  const tiempoTranscurrido = Date.now()
+  const hoy = new Date(tiempoTranscurrido)
   const { selectedPatientId } = usePatientContext()
   const handleCreateAppointment = () => {
     const formData = {
@@ -117,7 +118,7 @@ const Modals = () => {
       socialsecurityaffiliation: socialsecurityaffiliation,
       socialsecuritycompany_id: socialsecuritycompanyId,
       affiliation: affiliation,
-      entryDate: '2024-08-08',
+      entryDate: hoy.toLocaleDateString(),
       contactedWhatsapp: true,
       contactedEmail: true,
       contactedSms: false,

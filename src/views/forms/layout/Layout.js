@@ -51,6 +51,24 @@ import {
 const Layout = () => {
   const [appointments, setAppointments] = useState([])
   const { selectedPatientId } = usePatientContext()
+  const handleCreateAppointment = () => {
+    const formData = {
+      patient_id: selectedPatientId,
+      name: 'N/A',
+      current: 1,
+      dosage: 'N/A',
+      notes: 'N/A',
+    }
+    axios
+      .post('https://demo.habidd.com/api/ehr/anamnesis/drug/create.php', formData)
+      .then((response) => {
+        console.log('Respuesta exitosa:', response.data)
+      })
+      .catch((error) => {
+        console.error('Error en la solicitud:', error)
+        console.log('CITA CREADO')
+      })
+  }
   function getAppointments() {
     const options = {
       method: 'GET',
@@ -122,9 +140,9 @@ const Layout = () => {
           {' '}
           <CPagination aria-label="Page navigation example" align="center">
             <CPaginationItem href="#/forms/floating-labels">Ant fam y per</CPaginationItem>
-            <CPaginationItem href="#/forms/input-group">Condiciones Clinicas</CPaginationItem>
+            <CPaginationItem href="#/forms/input-group">Condicion Medica Actual</CPaginationItem>
             <CPaginationItem active href="#/forms/layout">
-              medicamentos
+              Uso de Medicamentos
             </CPaginationItem>
           </CPagination>
           <CCard className="mb-4">
@@ -135,44 +153,67 @@ const Layout = () => {
               </strong>
             </CCardHeader>
             <CCardBody md={9} style={{ maxHeight: '400px', overflowY: 'auto' }}>
-              <CTable striped hover bordered className="text-center">
-                <CTableHead color="primary">
-                  <CTableRow>
-                    <CTableHeaderCell scope="col">Nombre/Principio activo</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Posologia</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">¿Actual?</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">
-                      ¿Desde cuando usa este medicamento?
-                    </CTableHeaderCell>
-                    <CTableHeaderCell scope="col">
-                      ¿Hasta cuando usa este medicamento?
-                    </CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Observaciones</CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  {appointments.map((item, index) => (
-                    <CTableRow key={index}>
-                      <CTableHeaderCell>{item.name}</CTableHeaderCell>
-                      <CTableDataCell>{item.dosage}</CTableDataCell>
-                      <CTableDataCell>
-                        {' '}
-                        {item.current === '0' ? 'Sí' : item.current === '1' ? 'No' : ''}
-                      </CTableDataCell>
-                      <CTableDataCell>{item.dateFrom}</CTableDataCell>
-                      <CTableDataCell>{item.dateTo}</CTableDataCell>
-                      <CTableDataCell>{item.notes}</CTableDataCell>
-                    </CTableRow>
-                  ))}
-                </CTableBody>
-              </CTable>
-              <CRow className="p-2">
-                <CCol>
-                  <CButton color="primary" href="/#/charts">
-                    Agregar medicamento
-                  </CButton>
-                </CCol>
-              </CRow>
+              {' '}
+              <CContainer>
+                {appointments.length === 0 ? (
+                  <CRow className="justify-content-center">
+                    <CCol xs={5}>
+                      <CButton
+                        href="/#/buttons/button-groups"
+                        onClick={() => {
+                          handleCreateAppointment()
+                        }}
+                      >
+                        No usa medicamentos
+                      </CButton>
+                    </CCol>
+                    <CCol xs={5}>
+                      <CButton href="/#/charts">Agregar uso de medicamento</CButton>
+                    </CCol>
+                  </CRow>
+                ) : (
+                  <>
+                    <CTable striped hover bordered className="text-center">
+                      <CTableHead color="primary">
+                        <CTableRow>
+                          <CTableHeaderCell scope="col">Nombre/Principio activo</CTableHeaderCell>
+                          <CTableHeaderCell scope="col">Posologia</CTableHeaderCell>
+                          <CTableHeaderCell scope="col">¿Actual?</CTableHeaderCell>
+                          <CTableHeaderCell scope="col">
+                            ¿Desde cuando usa este medicamento?
+                          </CTableHeaderCell>
+                          <CTableHeaderCell scope="col">
+                            ¿Hasta cuando usa este medicamento?
+                          </CTableHeaderCell>
+                          <CTableHeaderCell scope="col">Observaciones</CTableHeaderCell>
+                        </CTableRow>
+                      </CTableHead>
+                      <CTableBody>
+                        {appointments.map((item, index) => (
+                          <CTableRow key={index}>
+                            <CTableHeaderCell>{item.name}</CTableHeaderCell>
+                            <CTableDataCell>{item.dosage}</CTableDataCell>
+                            <CTableDataCell>
+                              {' '}
+                              {item.current === '0' ? 'Sí' : item.current === '1' ? 'No' : ''}
+                            </CTableDataCell>
+                            <CTableDataCell>{item.dateFrom}</CTableDataCell>
+                            <CTableDataCell>{item.dateTo}</CTableDataCell>
+                            <CTableDataCell>{item.notes}</CTableDataCell>
+                          </CTableRow>
+                        ))}
+                      </CTableBody>
+                    </CTable>
+                    <CRow className="p-2">
+                      <CCol>
+                        <CButton color="primary" href="/#/charts">
+                          Nuevo medicamento
+                        </CButton>
+                      </CCol>
+                    </CRow>{' '}
+                  </>
+                )}
+              </CContainer>
             </CCardBody>
           </CCard>
         </CCol>

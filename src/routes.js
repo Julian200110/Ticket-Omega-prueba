@@ -51,6 +51,14 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
+const Panoramica = React.lazy(() => import('./views/theme/typography/Panoramica'))
+const Periapical = React.lazy(() => import('./views/theme/typography/Periapical'))
+const Coronal = React.lazy(() => import('./views/theme/typography/Coronal'))
+const Tomografia = React.lazy(() => import('./views/theme/typography/Tomografia'))
+const AgregarExamenOdontologico = React.lazy(() =>
+  import('./views/theme/typography/AgregarExamenOdontologico'),
+)
+
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
@@ -96,6 +104,15 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', element: Modals },
   { path: '/notifications/toasts', name: 'Toasts', element: Toasts },
   { path: '/widgets', name: 'Widgets', element: Widgets },
+  { path: '/Panoramica', name: 'Panoramica', element: Panoramica },
+  { path: '/Periapical', name: 'Periapical', element: Periapical },
+  { path: '/tomografia', name: 'tomografia', element: Tomografia },
+  { path: '/coronal', name: 'coronal', element: Coronal },
+  {
+    path: '/AgregarExamenOdontologico',
+    name: 'AgregarExamenOdontologico',
+    element: AgregarExamenOdontologico,
+  },
   { path: '/Odontogram', name: 'Odontogram', element: Odontogram },
 ]
 

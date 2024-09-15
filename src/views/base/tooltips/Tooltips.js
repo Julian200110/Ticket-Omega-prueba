@@ -123,9 +123,9 @@ const Tooltips = () => {
           <CPagination aria-label="Page navigation example" align="center">
             <CPaginationItem href="#/forms/floating-labels">Ant fam y per</CPaginationItem>
             <CPaginationItem active href="#/forms/input-group">
-              Condiciones Clinicas
+              Condicion Medica Actual
             </CPaginationItem>
-            <CPaginationItem href="#/forms/layout">medicamentos</CPaginationItem>
+            <CPaginationItem href="#/forms/layout">Uso de Medicamentos</CPaginationItem>
           </CPagination>
           <CCard className="mb-4">
             <CCardHeader>
