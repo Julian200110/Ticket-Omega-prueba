@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../../PatientContext'
+import axios from 'axios'
 import {
   CButton,
   CDropdown,
@@ -39,8 +41,37 @@ import {
   cilUser,
   cilCalendar,
 } from '@coreui/icons'
+import { Button } from '@coreui/coreui'
 
 const FloatingLabels = () => {
+  const [appointments, setAppointments] = useState([])
+  const { selectedPatientId } = usePatientContext()
+  function getAppointments() {
+    const options = {
+      method: 'GET',
+      url: `https://demo.habidd.com/api/ehr/anamnesis/background/list.php?patient_id=${selectedPatientId}`,
+    }
+    axios
+      .request(options)
+      .then((response) => {
+        console.log(response.data.data)
+        console.log('golaa')
+        return response
+      })
+      .then((responseData) => {
+        if (responseData && responseData.data) {
+          setAppointments(responseData.data.data)
+        } else {
+          setAppointments([])
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+  useEffect(() => {
+    getAppointments()
+  }, [])
   return (
     <CContainer>
       <CRow>
@@ -100,51 +131,63 @@ const FloatingLabels = () => {
             </CCardHeader>
             <CCardBody md={9} style={{ maxHeight: '400px', overflowY: 'auto' }}>
               <CContainer>
-                <CRow>
-                  <CCol>
-                    <h4 style={{ color: '#5856D6' }}>Antecedentes Familiares y Personales</h4>
-                  </CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>
-                    <strong>Fecha</strong>
-                  </CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>123456</CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>
-                    <strong>Antecedentes Medicos Familiares</strong>
-                  </CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>16/12/2020</CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>
-                    <strong>Antecedentes Medicos Personales</strong>
-                  </CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>No refiere</CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>
-                    <strong>Alergias</strong>
-                  </CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>No refiere</CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>
-                    <strong>¿Cree usted que hay algo de más importancia que debamos saber?</strong>
-                  </CCol>
-                </CRow>
-                <CRow className="p-2">
-                  <CCol>No refiere</CCol>
-                </CRow>
+                {appointments === null ? (
+                  <CRow className="justify-content-center">
+                    <CCol xs={4}>
+                      <CButton>Agregar anamnesis</CButton>
+                    </CCol>
+                  </CRow>
+                ) : (
+                  <>
+                    <CRow>
+                      <CCol>
+                        <h4 style={{ color: '#5856D6' }}>Antecedentes Familiares y Personales</h4>
+                      </CCol>
+                    </CRow>
+                    <CRow className="p-2">
+                      <CCol>
+                        <strong>Fecha</strong>
+                      </CCol>
+                    </CRow>
+                    <CRow className="p-2">
+                      <CCol>{appointments.date}</CCol>
+                    </CRow>
+                    <CRow className="p-2">
+                      <CCol>
+                        <strong>Antecedentes Medicos Familiares</strong>
+                      </CCol>
+                    </CRow>
+                    <CRow className="p-2">
+                      <CCol>{appointments.familyBackground}</CCol>
+                    </CRow>
+                    <CRow className="p-2">
+                      <CCol>
+                        <strong>Antecedentes Medicos Personales</strong>
+                      </CCol>
+                    </CRow>
+                    <CRow className="p-2">
+                      <CCol>{appointments.background}</CCol>
+                    </CRow>
+                    <CRow className="p-2">
+                      <CCol>
+                        <strong>Alergias</strong>
+                      </CCol>
+                    </CRow>
+                    <CRow className="p-2">
+                      <CCol>{appointments.allergyExists}</CCol>
+                    </CRow>
+                    <CRow className="p-2">
+                      <CCol>
+                        <strong>
+                          ¿Cree usted que hay algo de más importancia que debamos saber?
+                        </strong>
+                      </CCol>
+                    </CRow>
+                    <CRow className="p-2">
+                      <CCol>{appointments.other}</CCol>
+                    </CRow>
+                  </>
+                )}
               </CContainer>
             </CCardBody>
           </CCard>

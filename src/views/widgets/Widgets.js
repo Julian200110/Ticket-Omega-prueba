@@ -1,935 +1,208 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { usePatientContext } from '../../PatientContext'
+import axios from 'axios'
 import {
+  CButton,
+  CDropdown,
+  CDropdownDivider,
+  CDropdownItem,
+  CDropdownMenu,
+  CDropdownToggle,
+  CButtonGroup,
+  CButtonToolbar,
   CCard,
   CCardBody,
-  CCardGroup,
   CCardHeader,
   CCol,
-  CLink,
+  CFormCheck,
+  CFormInput,
+  CInputGroup,
+  CInputGroupText,
   CRow,
-  CWidgetStatsB,
-  CWidgetStatsC,
-  CWidgetStatsE,
-  CWidgetStatsF,
+  CContainer,
+  CPagination,
+  CPaginationItem,
+  CCardFooter,
+  CFormLabel,
+  CFormSelect,
+  CFormTextarea,
 } from '@coreui/react'
-import { getStyle } from '@coreui/utils'
+import { DocsExample } from 'src/components'
 import CIcon from '@coreui/icons-react'
 import {
-  cilArrowRight,
-  cilBasket,
   cilBell,
+  cilCalculator,
   cilChartPie,
-  cilMoon,
-  cilLaptop,
-  cilPeople,
-  cilSettings,
-  cilSpeech,
+  cilCursor,
+  cilDescription,
+  cilDrop,
+  cilNotes,
+  cilPencil,
+  cilPuzzle,
   cilSpeedometer,
+  cilStar,
   cilUser,
-  cilUserFollow,
+  cilCalendar,
 } from '@coreui/icons'
-import { CChartBar, CChartLine } from '@coreui/react-chartjs'
-import { DocsExample } from 'src/components'
-
-import WidgetsBrand from './WidgetsBrand'
-import WidgetsDropdown from './WidgetsDropdown'
+import { Button } from '@coreui/coreui'
 
 const Widgets = () => {
-  const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+  const { selectedPatientId } = usePatientContext()
+  const [fecha, setFecha] = useState([])
+  const [hora, setHora] = useState([])
+  const [tipoConsulta, setTipoConsulta] = useState([])
+  const [finalidadConsulta, setFinalidadConsulta] = useState([])
+  const [motivoConsulta, setMotivoConsulta] = useState([])
+  const [causaExterna, setCausaExterna] = useState([])
+  const [diagnosticoPrincipal, setDiagnosticoPrincipal] = useState([])
+  const [tipoDiagnosticoPrincipal, setTipoDiagnosticoPrincipal] = useState([])
+  const [actividadRealizada, setActividadRealizada] = useState([])
+  const [evolucion, setEvolucion] = useState([])
 
+  const handleCreateAppointment = () => {
+    const formData = {
+      patient_id: selectedPatientId,
+      date: fecha,
+      time: hora,
+      procedure_id: tipoConsulta,
+      reason: finalidadConsulta,
+      reasonText: motivoConsulta,
+      cause: causaExterna,
+      diagnosisMain_id: diagnosticoPrincipal,
+      diagnosisType: tipoDiagnosticoPrincipal,
+      evolution: evolucion,
+      actions: actividadRealizada,
+    }
+    axios
+      .post('https://demo.habidd.com/api/ehr/evolution/create.php', formData)
+      .then((response) => {
+        console.log('Respuesta exitosa:', response.data)
+      })
+      .catch((error) => {
+        console.error('Error en la solicitud:', error)
+        console.log('CITA CREADO')
+      })
+  }
   return (
-    <CCard className="mb-4">
-      <CCardHeader>Widgets</CCardHeader>
-      <CCardBody>
-        <DocsExample href="/components/widgets/#cwidgetstatsa">
-          <WidgetsDropdown />
-        </DocsExample>
-        <DocsExample href="/components/widgets/#cwidgetstatsb">
-          <CRow>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsB
-                className="mb-4"
-                progress={{ color: 'success', value: 89.9 }}
-                text="Lorem ipsum dolor sit amet enim."
-                title="Widget title"
-                value="89.9%"
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsB
-                className="mb-4"
-                value="12.124"
-                title="Widget title"
-                progress={{ color: 'info', value: 89.9 }}
-                text="Lorem ipsum dolor sit amet enim."
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsB
-                className="mb-4"
-                value="$98.111,00"
-                title="Widget title"
-                progress={{ color: 'warning', value: 89.9 }}
-                text="Lorem ipsum dolor sit amet enim."
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsB
-                className="mb-4"
-                value="2 TB"
-                title="Widget title"
-                progress={{ color: 'primary', value: 89.9 }}
-                text="Lorem ipsum dolor sit amet enim."
-              />
-            </CCol>
-          </CRow>
-        </DocsExample>
-        <DocsExample href="/components/widgets/#cwidgetstatsb">
-          <CRow>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsB
-                className="mb-4"
-                color="success"
-                inverse
-                value="89.9%"
-                title="Widget title"
-                progress={{ value: 89.9 }}
-                text="Lorem ipsum dolor sit amet enim."
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsB
-                className="mb-4"
-                color="info"
-                inverse
-                value="12.124"
-                title="Widget title"
-                progress={{ value: 89.9 }}
-                text="Lorem ipsum dolor sit amet enim."
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsB
-                className="mb-4"
-                color="warning"
-                inverse
-                value="$98.111,00"
-                title="Widget title"
-                progress={{ value: 89.9 }}
-                text="Lorem ipsum dolor sit amet enim."
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsB
-                className="mb-4"
-                color="primary"
-                inverse
-                value="2 TB"
-                title="Widget title"
-                progress={{ value: 89.9 }}
-                text="Lorem ipsum dolor sit amet enim."
-              />
-            </CCol>
-          </CRow>
-        </DocsExample>
-        <DocsExample href="/components/widgets/#cwidgetstatse">
-          <CRow>
-            <CCol sm={4} lg={2}>
-              <CWidgetStatsE
-                chart={
-                  <CChartBar
-                    className="mx-auto"
-                    style={{ height: '40px', width: '80px' }}
-                    data={{
-                      labels: [
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                      ],
-                      datasets: [
-                        {
-                          backgroundColor: getStyle('--cui-danger'),
-                          borderColor: 'transparent',
-                          borderWidth: 1,
-                          data: [
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                          ],
-                        },
-                      ],
-                    }}
-                    options={{
-                      maintainAspectRatio: false,
-                      plugins: {
-                        legend: {
-                          display: false,
-                        },
-                      },
-                      scales: {
-                        x: {
-                          display: false,
-                        },
-                        y: {
-                          display: false,
-                        },
-                      },
-                    }}
-                  />
-                }
-                className="mb-4"
-                title="title"
-                value="1,123"
-              />
-            </CCol>
-            <CCol sm={4} lg={2}>
-              <CWidgetStatsE
-                chart={
-                  <CChartBar
-                    className="mx-auto"
-                    style={{ height: '40px', width: '80px' }}
-                    data={{
-                      labels: [
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                      ],
-                      datasets: [
-                        {
-                          backgroundColor: getStyle('--cui-primary'),
-                          borderColor: 'transparent',
-                          borderWidth: 1,
-                          data: [
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                          ],
-                        },
-                      ],
-                    }}
-                    options={{
-                      maintainAspectRatio: false,
-                      plugins: {
-                        legend: {
-                          display: false,
-                        },
-                      },
-                      scales: {
-                        x: {
-                          display: false,
-                        },
-                        y: {
-                          display: false,
-                        },
-                      },
-                    }}
-                  />
-                }
-                className="mb-4"
-                title="title"
-                value="1,123"
-              />
-            </CCol>
-            <CCol sm={4} lg={2}>
-              <CWidgetStatsE
-                chart={
-                  <CChartBar
-                    className="mx-auto"
-                    style={{ height: '40px', width: '80px' }}
-                    data={{
-                      labels: [
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                      ],
-                      datasets: [
-                        {
-                          backgroundColor: getStyle('--cui-success'),
-                          borderColor: 'transparent',
-                          borderWidth: 1,
-                          data: [
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                          ],
-                        },
-                      ],
-                    }}
-                    options={{
-                      maintainAspectRatio: false,
-                      plugins: {
-                        legend: {
-                          display: false,
-                        },
-                      },
-                      scales: {
-                        x: {
-                          display: false,
-                        },
-                        y: {
-                          display: false,
-                        },
-                      },
-                    }}
-                  />
-                }
-                className="mb-4"
-                title="title"
-                value="1,123"
-              />
-            </CCol>
-            <CCol sm={4} lg={2}>
-              <CWidgetStatsE
-                chart={
-                  <CChartLine
-                    className="mx-auto"
-                    style={{ height: '40px', width: '80px' }}
-                    data={{
-                      labels: [
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                      ],
-                      datasets: [
-                        {
-                          backgroundColor: 'transparent',
-                          borderColor: getStyle('--cui-danger'),
-                          borderWidth: 2,
-                          data: [
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                          ],
-                        },
-                      ],
-                    }}
-                    options={{
-                      maintainAspectRatio: false,
-                      elements: {
-                        line: {
-                          tension: 0.4,
-                        },
-                        point: {
-                          radius: 0,
-                        },
-                      },
-                      plugins: {
-                        legend: {
-                          display: false,
-                        },
-                      },
-                      scales: {
-                        x: {
-                          display: false,
-                        },
-                        y: {
-                          display: false,
-                        },
-                      },
-                    }}
-                  />
-                }
-                className="mb-4"
-                title="title"
-                value="1,123"
-              />
-            </CCol>
-            <CCol sm={4} lg={2}>
-              <CWidgetStatsE
-                chart={
-                  <CChartLine
-                    className="mx-auto"
-                    style={{ height: '40px', width: '80px' }}
-                    data={{
-                      labels: [
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                      ],
-                      datasets: [
-                        {
-                          backgroundColor: 'transparent',
-                          borderColor: getStyle('--cui-success'),
-                          borderWidth: 2,
-                          data: [
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                          ],
-                        },
-                      ],
-                    }}
-                    options={{
-                      maintainAspectRatio: false,
-                      elements: {
-                        line: {
-                          tension: 0.4,
-                        },
-                        point: {
-                          radius: 0,
-                        },
-                      },
-                      plugins: {
-                        legend: {
-                          display: false,
-                        },
-                      },
-                      scales: {
-                        x: {
-                          display: false,
-                        },
-                        y: {
-                          display: false,
-                        },
-                      },
-                    }}
-                  />
-                }
-                className="mb-4"
-                title="title"
-                value="1,123"
-              />
-            </CCol>
-            <CCol sm={4} lg={2}>
-              <CWidgetStatsE
-                chart={
-                  <CChartLine
-                    className="mx-auto"
-                    style={{ height: '40px', width: '80px' }}
-                    data={{
-                      labels: [
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                        'T',
-                        'W',
-                        'T',
-                        'F',
-                        'S',
-                        'S',
-                        'M',
-                      ],
-                      datasets: [
-                        {
-                          backgroundColor: 'transparent',
-                          borderColor: getStyle('--cui-info'),
-                          borderWidth: 2,
-                          data: [
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                            random(40, 100),
-                          ],
-                        },
-                      ],
-                    }}
-                    options={{
-                      maintainAspectRatio: false,
-                      elements: {
-                        line: {
-                          tension: 0.4,
-                        },
-                        point: {
-                          radius: 0,
-                        },
-                      },
-                      plugins: {
-                        legend: {
-                          display: false,
-                        },
-                      },
-                      scales: {
-                        x: {
-                          display: false,
-                        },
-                        y: {
-                          display: false,
-                        },
-                      },
-                    }}
-                  />
-                }
-                className="mb-4"
-                title="title"
-                value="1,123"
-              />
-            </CCol>
-          </CRow>
-        </DocsExample>
-        <DocsExample href="/components/widgets/#cwidgetstatsf">
-          <CRow>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilSettings} size="xl" />}
-                title="income"
-                value="$1.999,50"
-                color="primary"
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilUser} size="xl" />}
-                title="income"
-                value="$1.999,50"
-                color="info"
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilMoon} size="xl" />}
-                title="income"
-                value="$1.999,50"
-                color="warning"
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilBell} size="xl" />}
-                title="income"
-                value="$1.999,50"
-                color="danger"
-              />
-            </CCol>
-          </CRow>
-        </DocsExample>
-        <DocsExample href="/components/widgets/#cwidgetstatsf">
-          <CRow>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilSettings} size="xl" />}
-                title="income"
-                value="$1.999,50"
-                color="primary"
-                footer={
-                  <CLink
-                    className="font-weight-bold font-xs text-medium-emphasis"
-                    href="https://coreui.io/"
-                    rel="noopener norefferer"
-                    target="_blank"
-                  >
-                    View more
-                    <CIcon icon={cilArrowRight} className="float-end" width={16} />
-                  </CLink>
-                }
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilLaptop} size="xl" />}
-                title="income"
-                value="$1.999,50"
-                color="info"
-                footer={
-                  <CLink
-                    className="font-weight-bold font-xs text-medium-emphasis"
-                    href="https://coreui.io/"
-                    rel="noopener norefferer"
-                    target="_blank"
-                  >
-                    View more
-                    <CIcon icon={cilArrowRight} className="float-end" width={16} />
-                  </CLink>
-                }
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilMoon} size="xl" />}
-                title="income"
-                value="$1.999,50"
-                color="warning"
-                footer={
-                  <CLink
-                    className="font-weight-bold font-xs text-medium-emphasis"
-                    href="https://coreui.io/"
-                    rel="noopener norefferer"
-                    target="_blank"
-                  >
-                    View more
-                    <CIcon icon={cilArrowRight} className="float-end" width={16} />
-                  </CLink>
-                }
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilBell} size="xl" />}
-                title="income"
-                value="$1.999,50"
-                color="danger"
-                footer={
-                  <CLink
-                    className="font-weight-bold font-xs text-medium-emphasis"
-                    href="https://coreui.io/"
-                    rel="noopener norefferer"
-                    target="_blank"
-                  >
-                    View more
-                    <CIcon icon={cilArrowRight} className="float-end" width={16} />
-                  </CLink>
-                }
-              />
-            </CCol>
-          </CRow>
-        </DocsExample>
-        <DocsExample href="/components/widgets/#cwidgetstatsf">
-          <CRow>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilSettings} size="xl" />}
-                padding={false}
-                title="income"
-                value="$1.999,50"
-                color="primary"
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilUser} size="xl" />}
-                padding={false}
-                title="income"
-                value="$1.999,50"
-                color="info"
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilMoon} size="xl" />}
-                padding={false}
-                title="income"
-                value="$1.999,50"
-                color="warning"
-              />
-            </CCol>
-            <CCol xs={12} sm={6} lg={3}>
-              <CWidgetStatsF
-                className="mb-3"
-                icon={<CIcon width={24} icon={cilBell} size="xl" />}
-                padding={false}
-                title="income"
-                value="$1.999,50"
-                color="danger"
-              />
-            </CCol>
-          </CRow>
-        </DocsExample>
-        <DocsExample href="/components/widgets/#cwidgetstatsd">
-          <WidgetsBrand />
-        </DocsExample>
-        <DocsExample href="/components/widgets/#cwidgetstatsd">
-          <WidgetsBrand withCharts />
-        </DocsExample>
-        <DocsExample href="/components/widgets/#cwidgetstatsc">
-          <CCardGroup className="mb-4">
-            <CWidgetStatsC
-              icon={<CIcon icon={cilPeople} height={36} />}
-              value="87.500"
-              title="Visitors"
-              progress={{ color: 'info', value: 75 }}
-            />
-            <CWidgetStatsC
-              icon={<CIcon icon={cilUserFollow} height={36} />}
-              value="385"
-              title="New Clients"
-              progress={{ color: 'success', value: 75 }}
-            />
-            <CWidgetStatsC
-              icon={<CIcon icon={cilBasket} height={36} />}
-              value="1238"
-              title="Products sold"
-              progress={{ color: 'warning', value: 75 }}
-            />
-            <CWidgetStatsC
-              icon={<CIcon icon={cilChartPie} height={36} />}
-              value="28%"
-              title="Returning Visitors"
-              progress={{ color: 'primary', value: 75 }}
-            />
-            <CWidgetStatsC
-              icon={<CIcon icon={cilSpeedometer} height={36} />}
-              value="5:34:11"
-              title="Avg. Time"
-              progress={{ color: 'danger', value: 75 }}
-            />
-          </CCardGroup>
-        </DocsExample>
-        <DocsExample href="/components/widgets/#cwidgetstatsc">
-          <CRow>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                icon={<CIcon icon={cilPeople} height={36} />}
-                value="87.500"
-                title="Visitors"
-                progress={{ color: 'info', value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                icon={<CIcon icon={cilUserFollow} height={36} />}
-                value="385"
-                title="New Clients"
-                progress={{ color: 'success', value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                icon={<CIcon icon={cilBasket} height={36} />}
-                value="1238"
-                title="Products sold"
-                progress={{ color: 'warning', value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                icon={<CIcon icon={cilChartPie} height={36} />}
-                value="28%"
-                title="Returning Visitors"
-                progress={{ color: 'primary', value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                icon={<CIcon icon={cilSpeedometer} height={36} />}
-                value="5:34:11"
-                title="Avg. Time"
-                progress={{ color: 'danger', value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                icon={<CIcon icon={cilSpeech} height={36} />}
-                value="972"
-                title="comments"
-                progress={{ color: 'info', value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-          </CRow>
-        </DocsExample>
-        <DocsExample href="/components/widgets/#cwidgetstatsc">
-          <CRow>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                color="info"
-                icon={<CIcon icon={cilPeople} height={36} />}
-                value="87.500"
-                title="Visitors"
-                inverse
-                progress={{ value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                color="success"
-                icon={<CIcon icon={cilUserFollow} height={36} />}
-                value="385"
-                title="New Clients"
-                inverse
-                progress={{ value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                color="warning"
-                icon={<CIcon icon={cilBasket} height={36} />}
-                value="1238"
-                title="Products sold"
-                inverse
-                progress={{ value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                color="primary"
-                icon={<CIcon icon={cilChartPie} height={36} />}
-                value="28%"
-                title="Returning Visitors"
-                inverse
-                progress={{ value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                color="danger"
-                icon={<CIcon icon={cilSpeedometer} height={36} />}
-                value="5:34:11"
-                title="Avg. Time"
-                inverse
-                progress={{ value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-            <CCol sm={6} md={2}>
-              <CWidgetStatsC
-                color="info"
-                icon={<CIcon icon={cilSpeech} height={36} />}
-                value="972"
-                title="comments"
-                inverse
-                progress={{ value: 75 }}
-                className="mb-4"
-              />
-            </CCol>
-          </CRow>
-        </DocsExample>
-      </CCardBody>
-    </CCard>
+    <CContainer>
+      <CRow>
+        <CCol md={3}>
+          {' '}
+          <CButtonGroup vertical role="group" aria-label="Vertical button group">
+            <CButton color="primary" variant="ghost" href="#/buttons/button-groups">
+              Datos Personales
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/forms/checks-radios">
+              Consultas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/Forms/Floating-labels" active>
+              Anamnesis
+            </CButton>
+            <CButton color="primary" variant="ghost" text-align="end" href="#/base/breadcrumbs">
+              Examen Fisico
+            </CButton>
+            <CButton color="primary" variant="ghost" href="#/forms/Range">
+              Odontograma
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/navs">
+              Diagnosticos y Planes de tratamiento
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/forms/Select">
+              Evolucion
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/carousels">
+              Soportes
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/collapses">
+              Consentimiento informado
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/base/list-groups">
+              Ordenes medicas
+            </CButton>
+            <CButton color="primary" variant="ghost" href="/#/icons/coreui-icons">
+              Preescripciones medicas
+            </CButton>
+          </CButtonGroup>
+        </CCol>
+        <CCol>
+          {' '}
+          <CPagination aria-label="Page navigation example" align="center">
+            <CPaginationItem active href="#/base/breadcrumbs">
+              Ant fam y per
+            </CPaginationItem>
+            <CPaginationItem href="#/forms/input-group">Condiciones Clinicas</CPaginationItem>
+            <CPaginationItem href="#/forms/layout">medicamentos</CPaginationItem>
+          </CPagination>
+          <CCard className="mb-4">
+            <CCardHeader>
+              <strong>
+                <CIcon icon={cilUser} />
+                Anamnesis
+              </strong>
+            </CCardHeader>
+            <CCardBody md={9} style={{ maxHeight: '400px', overflowY: 'auto' }}>
+              {' '}
+              <CContainer>
+                <CRow className="p-2">
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Fecha</CFormLabel>{' '}
+                    </strong>
+                    <CFormInput type="date" id="exampleFormControlInput1" placeholder="" />
+                  </CCol>
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Hora</CFormLabel>{' '}
+                    </strong>
+                    <CFormInput type="Time" id="exampleFormControlInput1" placeholder="" />
+                  </CCol>
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Tipo de consulta</CFormLabel>{' '}
+                    </strong>
+                    <CFormSelect aria-label="Default select example">
+                      <option></option>
+                      <option value="Primera vez">Primera vez</option>
+                      <option value="Control">Control</option>
+                      <option value="Urgencia">Control</option>
+                      <option value="Finalizacion de tratamiento">
+                        Finalizacion de tratamiento
+                      </option>
+                      <option value="Valoracion">Valoracion</option>
+                      <option value="Inicio de tratamiento ">Inicio de tratamiento </option>
+                    </CFormSelect>
+                  </CCol>
+                </CRow>
+
+                <CRow className="p-2">
+                  <CCol>
+                    <strong>
+                      <CFormLabel htmlFor="exampleFormControlInput1">
+                        Motivo de consulta{' '}
+                      </CFormLabel>{' '}
+                    </strong>
+                    <CFormTextarea type="text" id="exampleFormControlInput1" placeholder="" />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CButton
+                      color="primary"
+                      href="/#/buttons/button-groups"
+                      onClick={() => {
+                        handleCreateAppointment()
+                      }}
+                    >
+                      Guardar consulta
+                    </CButton>
+                  </CCol>
+                </CRow>
+              </CContainer>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+    </CContainer>
   )
 }
 

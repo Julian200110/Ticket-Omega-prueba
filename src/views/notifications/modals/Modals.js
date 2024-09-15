@@ -178,12 +178,15 @@ const Modals = () => {
                     <strong>
                       <CFormLabel htmlFor="exampleFormControlInput1">Tipo de documento</CFormLabel>{' '}
                     </strong>
-                    <CFormInput
-                      type="text"
-                      id="exampleFormControlInput1"
-                      placeholder=""
+                    <CFormSelect
+                      aria-label="Default select example"
                       onChange={(e) => setIdType(e.target.value)}
-                    />
+                    >
+                      <option></option>
+                      <option value="Casado">CC</option>
+                      <option value="Soltero">TI</option>
+                      <option value="Viudo">CE</option>
+                    </CFormSelect>
                   </CCol>
                   <CCol>
                     <strong>

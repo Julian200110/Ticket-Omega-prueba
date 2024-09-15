@@ -33,7 +33,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Listado',
+    name: 'Historia Clinica',
     to: '/theme/colors',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
