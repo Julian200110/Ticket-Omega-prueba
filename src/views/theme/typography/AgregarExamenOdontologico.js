@@ -92,14 +92,23 @@ const AgregarExamenOdontologico = () => {
             <CButton color="primary" variant="ghost" href="#/buttons/button-groups">
               Datos Personales
             </CButton>
-            <CButton color="primary" variant="ghost" href="/#/forms/checks-radios" active>
+            <CButton color="primary" variant="ghost" href="/#/forms/checks-radios">
               Consultas
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/Forms/Floating-labels">
               Anamnesis
-            </CButton>
+            </CButton>{' '}
             <CButton color="primary" variant="ghost" text-align="end" href="#/base/breadcrumbs">
               Examen Fisico
+            </CButton>
+            <CButton
+              color="primary"
+              variant="ghost"
+              text-align="end"
+              href="#/ExamenOdontologico"
+              active
+            >
+              Examen Odontologico
             </CButton>
             <CButton color="primary" variant="ghost" href="#/forms/Range">
               Odontograma
@@ -130,7 +139,7 @@ const AgregarExamenOdontologico = () => {
             <CCardHeader>
               <strong>
                 <CIcon icon={cilUser} />
-                Evolucion
+                Examen Odontologico
               </strong>
             </CCardHeader>
             <CCardBody md={9} style={{ maxHeight: '400px', overflowY: 'auto' }}>
@@ -147,6 +156,11 @@ const AgregarExamenOdontologico = () => {
                       placeholder=""
                       onChange={(e) => setFecha(e.target.value)}
                     />
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol>
+                    <h4 style={{ color: '#5856D6' }}>Examen clinico Oral</h4>
                   </CCol>
                 </CRow>
                 <CRow className="p-2">
@@ -579,6 +593,401 @@ const AgregarExamenOdontologico = () => {
                     </CFormSelect>
                   </CCol>
                   <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CFormLabel
+                      htmlFor="exampleFormControlInput1"
+                      style={{ marginRight: '10px', minWidth: '260px' }}
+                    >
+                      Observaciones
+                    </CFormLabel>{' '}
+                    <CFormTextarea
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    ></CFormTextarea>
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol>
+                    <h4 style={{ color: '#5856D6' }}>Examen Periodontal</h4>
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <strong>Las encias presentan</strong>
+                  </CCol>
+                  <CCol>
+                    <strong>¿Presencia?</strong>
+                  </CCol>
+                  <CCol>
+                    <strong>N° de diente</strong>
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormLabel
+                      htmlFor="exampleFormControlInput1"
+                      style={{ marginRight: '10px', minWidth: '260px' }}
+                    >
+                      Sangrado
+                    </CFormLabel>{' '}
+                    <CFormSelect
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    >
+                      <option></option>
+                      <option value="Primera vez">Si</option>
+                      <option value="Control">No</option>
+                    </CFormSelect>
+                  </CCol>
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormLabel
+                      htmlFor="exampleFormControlInput1"
+                      style={{ marginRight: '10px', minWidth: '260px' }}
+                    >
+                      Retracciones
+                    </CFormLabel>{' '}
+                    <CFormSelect
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    >
+                      <option></option>
+                      <option value="Primera vez">Si</option>
+                      <option value="Control">No</option>
+                    </CFormSelect>
+                  </CCol>
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormLabel
+                      htmlFor="exampleFormControlInput1"
+                      style={{ marginRight: '10px', minWidth: '260px' }}
+                    >
+                      Otros
+                    </CFormLabel>{' '}
+                    <CFormSelect
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    >
+                      <option></option>
+                      <option value="Primera vez">Si</option>
+                      <option value="Control">No</option>
+                    </CFormSelect>
+                  </CCol>
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CFormLabel
+                      htmlFor="exampleFormControlInput1"
+                      style={{ marginRight: '10px', minWidth: '260px' }}
+                    >
+                      Observaciones
+                    </CFormLabel>{' '}
+                    <CFormTextarea
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    ></CFormTextarea>
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <strong>Hay presencia de</strong>
+                  </CCol>
+                  <CCol>
+                    <strong>¿Presencia?</strong>
+                  </CCol>
+                  <CCol>
+                    <strong>N° de diente</strong>
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormLabel
+                      htmlFor="exampleFormControlInput1"
+                      style={{ marginRight: '10px', minWidth: '260px' }}
+                    >
+                      Placa blanda
+                    </CFormLabel>{' '}
+                    <CFormSelect
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    >
+                      <option></option>
+                      <option value="Primera vez">Si</option>
+                      <option value="Control">No</option>
+                    </CFormSelect>
+                  </CCol>
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormLabel
+                      htmlFor="exampleFormControlInput1"
+                      style={{ marginRight: '10px', minWidth: '260px' }}
+                    >
+                      Cálculos
+                    </CFormLabel>{' '}
+                    <CFormSelect
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    >
+                      <option></option>
+                      <option value="Primera vez">Si</option>
+                      <option value="Control">No</option>
+                    </CFormSelect>
+                  </CCol>
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormLabel
+                      htmlFor="exampleFormControlInput1"
+                      style={{ marginRight: '10px', minWidth: '260px' }}
+                    >
+                      Sitios empaquetamiento
+                    </CFormLabel>{' '}
+                    <CFormSelect
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    >
+                      <option></option>
+                      <option value="Primera vez">Si</option>
+                      <option value="Control">No</option>
+                    </CFormSelect>
+                  </CCol>
+                  <CCol style={{ display: 'flex', alignItems: 'center' }}>
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CFormLabel
+                      htmlFor="exampleFormControlInput1"
+                      style={{ marginRight: '10px', minWidth: '260px' }}
+                    >
+                      Observaciones
+                    </CFormLabel>{' '}
+                    <CFormTextarea
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    ></CFormTextarea>
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol>
+                    <h4 style={{ color: '#5856D6' }}>Oclusión</h4>
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">
+                      Clasificación de angle
+                    </CFormLabel>{' '}
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">
+                      Interferencias en lateral
+                    </CFormLabel>{' '}
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">
+                      Interferencias en protrusiva
+                    </CFormLabel>{' '}
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">
+                      Articulación temporomandibular
+                    </CFormLabel>{' '}
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CFormLabel
+                      htmlFor="exampleFormControlInput1"
+                      style={{ marginRight: '10px', minWidth: '260px' }}
+                    >
+                      Observaciones
+                    </CFormLabel>{' '}
+                    <CFormTextarea
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    ></CFormTextarea>
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol>
+                    <h4 style={{ color: '#5856D6' }}>Habitos orales</h4>
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">Respiración bucal</CFormLabel>{' '}
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">Queilofagia</CFormLabel>{' '}
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">Succión digital</CFormLabel>{' '}
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">Lengua protráctil</CFormLabel>{' '}
+                    <CFormInput
+                      type="text"
+                      id="exampleFormControlInput1"
+                      placeholder=""
+                      onChange={(e) => setMotivoConsulta(e.target.value)}
+                    />
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol>
+                    <h4 style={{ color: '#5856D6' }}>Higiene oral</h4>
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">Higiene oral</CFormLabel>{' '}
+                    <CFormSelect
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    >
+                      <option></option>
+                      <option value="Primera vez">Si</option>
+                      <option value="Control">No</option>
+                    </CFormSelect>
+                  </CCol>
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">
+                      Frecuencia de cepillado
+                    </CFormLabel>{' '}
+                    <CFormSelect
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    >
+                      <option></option>
+                      <option value="Primera vez">Si</option>
+                      <option value="Control">No</option>
+                    </CFormSelect>
+                  </CCol>
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">Uso de seda dental</CFormLabel>{' '}
+                    <CFormSelect
+                      aria-label="Default select example"
+                      onChange={(e) => setTipoConsulta(e.target.value)}
+                    >
+                      <option></option>
+                      <option value="Primera vez">Si</option>
+                      <option value="Control">No</option>
+                    </CFormSelect>
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol>
+                    <h4 style={{ color: '#5856D6' }}>Indice de placa bacteriana</h4>
+                  </CCol>
+                </CRow>
+                <CRow className="p-2">
+                  <CCol>
+                    <CFormLabel htmlFor="exampleFormControlInput1">
+                      Indice de placa bacteriana
+                    </CFormLabel>{' '}
                     <CFormInput
                       type="text"
                       id="exampleFormControlInput1"

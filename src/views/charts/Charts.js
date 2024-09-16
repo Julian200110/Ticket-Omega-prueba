@@ -95,8 +95,12 @@ const Charts = () => {
             <CButton color="primary" variant="ghost" href="/#/Forms/Floating-labels" active>
               Anamnesis
             </CButton>
+
             <CButton color="primary" variant="ghost" text-align="end" href="#/base/breadcrumbs">
               Examen Fisico
+            </CButton>
+            <CButton color="primary" variant="ghost" text-align="end" href="#/ExamenOdontologico">
+              Examen Odontologico
             </CButton>
             <CButton color="primary" variant="ghost" href="#/forms/Range">
               Odontograma

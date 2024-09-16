@@ -88,7 +88,7 @@ const Popovers = () => {
             </CButton>
             <CButton color="primary" variant="ghost" href="/#/Forms/Floating-labels">
               Anamnesis
-            </CButton>
+            </CButton>{' '}
             <CButton
               color="primary"
               variant="ghost"
@@ -97,6 +97,9 @@ const Popovers = () => {
               active
             >
               Examen Fisico
+            </CButton>{' '}
+            <CButton color="primary" variant="ghost" text-align="end" href="#/ExamenOdontologico">
+              Examen Odontologico
             </CButton>
             <CButton color="primary" variant="ghost" href="#/forms/Range">
               Odontograma
@@ -123,12 +126,12 @@ const Popovers = () => {
         </CCol>
         <CCol>
           {' '}
-          <CPagination aria-label="Page navigation example" align="center">
+          {/* <CPagination aria-label="Page navigation example" align="center">
             <CPaginationItem active href="#/base/breadcrumbs">
               Signos Vitales
             </CPaginationItem>
             <CPaginationItem href="#/base/cards">Patologias</CPaginationItem>
-          </CPagination>
+          </CPagination> */}
           <CCard className="mb-4">
             <CCardHeader>
               <strong>
