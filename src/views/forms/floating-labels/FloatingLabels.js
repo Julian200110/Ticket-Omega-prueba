@@ -87,7 +87,6 @@ const FloatingLabels = () => {
             <CButton color="primary" variant="ghost" href="/#/Forms/Floating-labels" active>
               Anamnesis
             </CButton>
-
             <CButton color="primary" variant="ghost" text-align="end" href="#/base/breadcrumbs">
               Examen Fisico
             </CButton>
@@ -138,7 +137,7 @@ const FloatingLabels = () => {
                 {appointments === null ? (
                   <CRow className="justify-content-center">
                     <CCol xs={4}>
-                      <CButton>Agregar anamnesis</CButton>
+                      <CButton href="#/AgregarAnamnesis">Agregar anamnesis</CButton>
                     </CCol>
                   </CRow>
                 ) : (

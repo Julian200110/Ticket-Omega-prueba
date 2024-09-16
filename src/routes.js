@@ -58,6 +58,8 @@ const Tomografia = React.lazy(() => import('./views/theme/typography/Tomografia'
 const AgregarExamenOdontologico = React.lazy(() =>
   import('./views/theme/typography/AgregarExamenOdontologico'),
 )
+const AgregarAnamnesis = React.lazy(() => import('./views/theme/typography/AgregarAnamnesis'))
+
 const ExamenOdontologico = React.lazy(() => import('./views/theme/typography/ExamenOdontologico'))
 
 const routes = [
@@ -113,6 +115,11 @@ const routes = [
     path: '/AgregarExamenOdontologico',
     name: 'AgregarExamenOdontologico',
     element: AgregarExamenOdontologico,
+  },
+  {
+    path: '/AgregarAnamnesis',
+    name: 'AgregarAnamnesis',
+    element: AgregarAnamnesis,
   },
   {
     path: '/ExamenOdontologico',
